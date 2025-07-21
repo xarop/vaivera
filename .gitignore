@@ -1,48 +1,48 @@
-# WordPress core files
-wp-admin/
-wp-includes/
-wp-content/plugins/index.php
-wp-content/themes/index.php
-wp-content/index.php
-license.txt
-readme.html
-wp-*.php
-xmlrpc.php
-index.php
+# Wordpress - ignore core, configuration, examples, uploads and logs.
+# https://github.com/github/gitignore/blob/main/WordPress.gitignore
+
+# Core
+#
+# Note: if you want to stage/commit WP core files
+# you can delete this whole section/until Configuration.
+/wp-admin/
+/wp-content/index.php
+/wp-content/languages
+/wp-content/plugins/index.php
+/wp-content/themes/index.php
+/wp-includes/
+/index.php
+/license.txt
+/readme.html
+/wp-*.php
+/xmlrpc.php
 
 # Configuration
 wp-config.php
-wp-config-sample.php
-.htaccess
+
+# Example themes
+/wp-content/themes/twenty*/
+
+# Example plugin
+/wp-content/plugins/hello.php
+
+# Uploads
+/wp-content/uploads/
 
 # Log files
 *.log
 
-# Cache files
-wp-content/cache/
-wp-content/advanced-cache.php
-wp-content/wp-cache-config.php
+# htaccess
+/.htaccess
 
-# Uploads
-wp-content/uploads/
+# All plugins
+#
+# Note: If you wish to whitelist plugins,
+# uncomment the next line
+#/wp-content/plugins
 
-# Backup files
-*.bak
-*.swp
-*.zip
-*.tar.gz
-
-# OS generated files
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
-
-# IDE files
-.idea/
-.vscode/
-*.sublime-project
-*.sublime-workspace
+# All themes
+#
+# Note: If you wish to whitelist themes,
+# uncomment the next line
+#/wp-content/themes
