@@ -257,7 +257,7 @@ function vaivera_customizer_css() {
         echo '</style>';
     }
 }
-add_action( 'wp_head', 'minimalist_customizer_css' );
+add_action( 'wp_head', 'vaivera_customizer_css' );
 
 /**
  * Custom comment callback function.
@@ -268,7 +268,7 @@ add_action( 'wp_head', 'minimalist_customizer_css' );
  * @since 1.0.0
  * @return void
  */
-function minimalist_comment_callback( $comment, $args, $depth ) {
+function vaivera_comment_callback( $comment, $args, $depth ) {
     if ( 'div' === $args['style'] ) {
         $tag       = 'div';
         $add_below = 'comment';
@@ -300,20 +300,20 @@ function minimalist_comment_callback( $comment, $args, $depth ) {
                     <?php
                     printf(
                         /* translators: 1: Date, 2: Time */
-                        esc_html__( '%1$s at %2$s', 'minimalist' ),
+                        esc_html__( '%1$s at %2$s', 'vaivera' ),
                         esc_html( get_comment_date() ),
                         esc_html( get_comment_time() )
                     );
                     ?>
                 </a>
-                <?php edit_comment_link( esc_html__( '(Edit)', 'minimalist' ), '  ', '' ); ?>
+                <?php edit_comment_link( esc_html__( '(Edit)', 'vaivera' ), '  ', '' ); ?>
             </div>
         </div>
     </div>
 
     <?php if ( '0' === $comment->comment_approved ) : ?>
         <em class="comment-awaiting-moderation">
-            <?php esc_html_e( 'Your comment is awaiting moderation.', 'minimalist' ); ?>
+            <?php esc_html_e( 'Your comment is awaiting moderation.', 'vaivera' ); ?>
         </em>
         <br />
     <?php endif; ?>
@@ -350,18 +350,18 @@ function minimalist_comment_callback( $comment, $args, $depth ) {
  * @since 1.0.0
  * @return array
  */
-function minimalist_comment_form_fields( $fields ) {
+function vaivera_comment_form_fields( $fields ) {
     $commenter = wp_get_current_commenter();
     
-    $fields['author'] = '<div class="form-row"><div class="form-group comment-form-author"><label for="author">' . esc_html__( 'Name', 'minimalist' ) . ' <span class="required">*</span></label> <input id="author" name="author" type="text" value="' . esc_attr( $commenter['comment_author'] ) . '" size="30" maxlength="245" autocomplete="name" required="required" placeholder="' . esc_attr__( 'Your name', 'minimalist' ) . '" /></div>';
+    $fields['author'] = '<div class="form-row"><div class="form-group comment-form-author"><label for="author">' . esc_html__( 'Name', 'vaivera' ) . ' <span class="required">*</span></label> <input id="author" name="author" type="text" value="' . esc_attr( $commenter['comment_author'] ) . '" size="30" maxlength="245" autocomplete="name" required="required" placeholder="' . esc_attr__( 'Your name', 'vaivera' ) . '" /></div>';
     
-    $fields['email'] = '<div class="form-group comment-form-email"><label for="email">' . esc_html__( 'Email', 'minimalist' ) . ' <span class="required">*</span></label> <input id="email" name="email" type="email" value="' . esc_attr( $commenter['comment_author_email'] ) . '" size="30" maxlength="100" aria-describedby="email-notes" autocomplete="email" required="required" placeholder="' . esc_attr__( 'your@email.com', 'minimalist' ) . '" /></div></div>';
+    $fields['email'] = '<div class="form-group comment-form-email"><label for="email">' . esc_html__( 'Email', 'vaivera' ) . ' <span class="required">*</span></label> <input id="email" name="email" type="email" value="' . esc_attr( $commenter['comment_author_email'] ) . '" size="30" maxlength="100" aria-describedby="email-notes" autocomplete="email" required="required" placeholder="' . esc_attr__( 'your@email.com', 'vaivera' ) . '" /></div></div>';
     
-    $fields['url'] = '<div class="form-group comment-form-url"><label for="url">' . esc_html__( 'Website', 'minimalist' ) . '</label> <input id="url" name="url" type="url" value="' . esc_attr( $commenter['comment_author_url'] ) . '" size="30" maxlength="200" autocomplete="url" placeholder="' . esc_attr__( 'https://yourwebsite.com (optional)', 'minimalist' ) . '" /></div>';
+    $fields['url'] = '<div class="form-group comment-form-url"><label for="url">' . esc_html__( 'Website', 'vaivera' ) . '</label> <input id="url" name="url" type="url" value="' . esc_attr( $commenter['comment_author_url'] ) . '" size="30" maxlength="200" autocomplete="url" placeholder="' . esc_attr__( 'https://yourwebsite.com (optional)', 'vaivera' ) . '" /></div>';
     
     return $fields;
 }
-add_filter( 'comment_form_default_fields', 'minimalist_comment_form_fields' );
+add_filter( 'comment_form_default_fields', 'vaivera_comment_form_fields' );
 
 /**
  * Register custom blocks.
@@ -369,7 +369,7 @@ add_filter( 'comment_form_default_fields', 'minimalist_comment_form_fields' );
  * @since 1.0.0
  * @return void
  */
-function minimalist_register_blocks() {
+function vaivera_register_blocks() {
     // Register the image gallery block
     register_block_type( get_template_directory() . '/blocks/image-gallery' );
 }
