@@ -1,9 +1,9 @@
 <?php
 /**
- * Minimalist Theme Functions
+ * Vaivera Theme Functions
  *
  * @category WordPress_Theme
- * @package  Minimalist
+ * @package  Vaivera
  * @author   Theme Developer <developer@example.com>
  * @license  GPL-2.0+ https://www.gnu.org/licenses/gpl-2.0.html
  * @link     https://example.com
@@ -21,10 +21,10 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @since 1.0.0
  * @return void
  */
-function minimalist_setup() {
+function vaivera_setup() {
     // Make theme available for translation.
     load_theme_textdomain(
-        'minimalist',
+        'vaivera',
         get_template_directory() . '/languages'
     );
 
@@ -52,11 +52,11 @@ function minimalist_setup() {
     // Register navigation menu.
     register_nav_menus(
         array(
-            'primary' => __( 'Primary Menu', 'minimalist' ),
+            'primary' => __( 'Primary Menu', 'vaivera' ),
         )
     );
 }
-add_action( 'after_setup_theme', 'minimalist_setup' );
+add_action( 'after_setup_theme', 'vaivera_setup' );
 
 /**
  * Enqueue styles and scripts.
@@ -64,9 +64,9 @@ add_action( 'after_setup_theme', 'minimalist_setup' );
  * @since 1.0.0
  * @return void
  */
-function minimalist_scripts() {
+function vaivera_scripts() {
     wp_enqueue_style(
-        'minimalist-style',
+        'vaivera-style',
         get_stylesheet_uri(),
         array(),
         '1.0'
@@ -74,7 +74,7 @@ function minimalist_scripts() {
 
     // Enqueue theme toggle script.
     wp_enqueue_script(
-        'minimalist-theme-toggle',
+        'vaivera-theme-toggle',
         get_template_directory_uri() . '/js/theme-toggle.js',
         array(),
         '1.0',
@@ -86,7 +86,7 @@ function minimalist_scripts() {
         wp_enqueue_script( 'comment-reply' );
     }
 }
-add_action( 'wp_enqueue_scripts', 'minimalist_scripts' );
+add_action( 'wp_enqueue_scripts', 'vaivera_scripts' );
 
 /**
  * Enqueue Gutenberg editor styles.
@@ -94,15 +94,15 @@ add_action( 'wp_enqueue_scripts', 'minimalist_scripts' );
  * @since 1.0.0
  * @return void
  */
-function minimalist_editor_styles() {
+function vaivera_editor_styles() {
     wp_enqueue_style(
-        'minimalist-editor-style',
+        'vaivera-editor-style',
         get_template_directory_uri() . '/editor-style.css',
         array(),
         '1.0'
     );
 }
-add_action( 'enqueue_block_editor_assets', 'minimalist_editor_styles' );
+add_action( 'enqueue_block_editor_assets', 'vaivera_editor_styles' );
 
 /**
  * Custom excerpt length.
@@ -111,10 +111,10 @@ add_action( 'enqueue_block_editor_assets', 'minimalist_editor_styles' );
  * @since 1.0.0
  * @return int
  */
-function minimalist_excerpt_length( $length ) {
+function vaivera_excerpt_length( $length ) {
     return 30;
 }
-add_filter( 'excerpt_length', 'minimalist_excerpt_length' );
+add_filter( 'excerpt_length', 'vaivera_excerpt_length' );
 
 /**
  * Custom excerpt more text.
@@ -123,10 +123,10 @@ add_filter( 'excerpt_length', 'minimalist_excerpt_length' );
  * @since 1.0.0
  * @return string
  */
-function minimalist_excerpt_more( $more ) {
+function vaivera_excerpt_more( $more ) {
     return '...';
 }
-add_filter( 'excerpt_more', 'minimalist_excerpt_more' );
+add_filter( 'excerpt_more', 'vaivera_excerpt_more' );
 
 /**
  * Remove unnecessary WordPress features for performance.
@@ -134,12 +134,12 @@ add_filter( 'excerpt_more', 'minimalist_excerpt_more' );
  * @since 1.0.0
  * @return void
  */
-function minimalist_remove_wp_features() {
+function vaivera_remove_wp_features() {
     remove_action( 'wp_head', 'wp_generator' );
     remove_action( 'wp_head', 'wlwmanifest_link' );
     remove_action( 'wp_head', 'rsd_link' );
 }
-add_action( 'init', 'minimalist_remove_wp_features' );
+add_action( 'init', 'vaivera_remove_wp_features' );
 
 /**
  * Disable emojis for performance.
@@ -147,7 +147,7 @@ add_action( 'init', 'minimalist_remove_wp_features' );
  * @since 1.0.0
  * @return void
  */
-function minimalist_disable_emojis() {
+function vaivera_disable_emojis() {
     remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
     remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
     remove_action( 'wp_print_styles', 'print_emoji_styles' );
@@ -156,7 +156,7 @@ function minimalist_disable_emojis() {
     remove_filter( 'comment_text_rss', 'wp_staticize_emoji' );
     remove_filter( 'wp_mail', 'wp_staticize_emoji_for_email' );
 }
-add_action( 'init', 'minimalist_disable_emojis' );
+add_action( 'init', 'vaivera_disable_emojis' );
 
 /**
  * Optimize images.
@@ -164,14 +164,14 @@ add_action( 'init', 'minimalist_disable_emojis' );
  * @since 1.0.0
  * @return void
  */
-function minimalist_image_sizes() {
+function vaivera_image_sizes() {
     // Remove default image sizes we don't need.
     remove_image_size( 'medium_large' );
 
     // Add custom image sizes if needed.
-    add_image_size( 'minimalist-featured', 800, 400, true );
+    add_image_size( 'vaivera-featured', 800, 400, true );
 }
-add_action( 'after_setup_theme', 'minimalist_image_sizes' );
+add_action( 'after_setup_theme', 'vaivera_image_sizes' );
 
 /**
  * Theme Customizer.
@@ -180,19 +180,19 @@ add_action( 'after_setup_theme', 'minimalist_image_sizes' );
  * @since 1.0.0
  * @return void
  */
-function minimalist_customize_register( $wp_customize ) {
+function vaivera_customize_register( $wp_customize ) {
     // Colors Section.
     $wp_customize->add_section(
-        'minimalist_colors',
+        'vaivera_colors',
         array(
-            'title'    => __( 'Theme Colors', 'minimalist' ),
+            'title'    => __( 'Theme Colors', 'vaivera' ),
             'priority' => 30,
         )
     );
 
     // Primary Color.
     $wp_customize->add_setting(
-        'minimalist_primary_color',
+        'vaivera_primary_color',
         array(
             'default'           => '#333333',
             'sanitize_callback' => 'sanitize_hex_color',
@@ -202,18 +202,18 @@ function minimalist_customize_register( $wp_customize ) {
     $wp_customize->add_control(
         new WP_Customize_Color_Control(
             $wp_customize,
-            'minimalist_primary_color',
+            'vaivera_primary_color',
             array(
-                'label'    => __( 'Primary Color', 'minimalist' ),
-                'section'  => 'minimalist_colors',
-                'settings' => 'minimalist_primary_color',
+                'label'    => __( 'Primary Color', 'vaivera' ),
+                'section'  => 'vaivera_colors',
+                'settings' => 'vaivera_primary_color',
             )
         )
     );
 
     // Accent Color.
     $wp_customize->add_setting(
-        'minimalist_accent_color',
+        'vaivera_accent_color',
         array(
             'default'           => '#333333',
             'sanitize_callback' => 'sanitize_hex_color',
@@ -223,16 +223,16 @@ function minimalist_customize_register( $wp_customize ) {
     $wp_customize->add_control(
         new WP_Customize_Color_Control(
             $wp_customize,
-            'minimalist_accent_color',
+            'vaivera_accent_color',
             array(
-                'label'    => __( 'Accent Color', 'minimalist' ),
-                'section'  => 'minimalist_colors',
-                'settings' => 'minimalist_accent_color',
+                'label'    => __( 'Accent Color', 'vaivera' ),
+                'section'  => 'vaivera_colors',
+                'settings' => 'vaivera_accent_color',
             )
         )
     );
 }
-add_action( 'customize_register', 'minimalist_customize_register' );
+add_action( 'customize_register', 'vaivera_customize_register' );
 
 /**
  * Output customizer CSS.
@@ -240,9 +240,9 @@ add_action( 'customize_register', 'minimalist_customize_register' );
  * @since 1.0.0
  * @return void
  */
-function minimalist_customizer_css() {
-    $primary_color = get_theme_mod( 'minimalist_primary_color', '#333333' );
-    $accent_color  = get_theme_mod( 'minimalist_accent_color', '#333333' );
+function vaivera_customizer_css() {
+    $primary_color = get_theme_mod( 'vaivera_primary_color', '#333333' );
+    $accent_color  = get_theme_mod( 'vaivera_accent_color', '#333333' );
 
     if ( '#333333' !== $primary_color || '#333333' !== $accent_color ) {
         echo '<style type="text/css">';
