@@ -88,3 +88,60 @@ function vaivera_register_project_taxonomy()
     register_taxonomy('project_category', array('project'), $args);
 }
 add_action('init', 'vaivera_register_project_taxonomy');
+
+/**
+ * Modify admin bar menu items for Project CPT
+ *
+ * @param WP_Admin_Bar $wp_admin_bar Admin bar object.
+ */
+function vaivera_modify_project_admin_bar_menu($wp_admin_bar)
+{
+    // Find the "View Posts" node for projects
+    $view_item = $wp_admin_bar->get_node('archive');
+    
+    // If we're on a project page and the archive node exists
+    if (is_singular('project') && $view_item) {
+        // Modify the title to "View Projects"
+        $view_item->title = __('View Projects', 'vaivera');
+        
+        // Update the node
+        $wp_admin_bar->add_node($view_item);
+    }
+}
+add_action('admin_bar_menu', 'vaivera_modify_project_admin_bar_menu', 80);
+
+/**
+ * Filter admin bar menu items for Project CPT
+ */
+function vaivera_filter_admin_bar_menu()
+{
+    global $wp_admin_bar;
+    
+    // Only run on project post type
+    if (!is_singular('project') && !is_post_type_archive('project')) {
+        return;
+    }
+    
+    // Get all nodes
+    $all_toolbar_nodes = $wp_admin_bar->get_nodes();
+    
+    if (!$all_toolbar_nodes) {
+        return;
+    }
+    
+    // Loop through nodes to find and modify "View Posts"
+    foreach ($all_toolbar_nodes as $node) {
+        if (isset($node->href) && strpos($node->href, '/project/') !== false && $node->title === 'View Posts') {
+            // Update the title
+            $wp_admin_bar->add_node(
+                array(
+                'id' => $node->id,
+                'title' => __('View Projects', 'vaivera'),
+                'href' => $node->href,
+                'parent' => $node->parent,
+                )
+            );
+        }
+    }
+}
+add_action('wp_before_admin_bar_render', 'vaivera_filter_admin_bar_menu', 999);
