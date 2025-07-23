@@ -373,7 +373,7 @@ function vaivera_register_blocks() {
     // Register the image gallery block
     register_block_type( get_template_directory() . '/blocks/image-gallery' );
 }
-add_action( 'init', 'minimalist_register_blocks' );
+add_action( 'init', 'vaivera_register_blocks' );
 
 /**
  * Enqueue block assets for the frontend.
