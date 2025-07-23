@@ -2,7 +2,7 @@
 /**
  * Page template
  *
- * @package Minimalist
+ * @package Vaivera
  * @since   1.0.0
  */
 

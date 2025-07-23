@@ -1,0 +1,164 @@
+/**
+ * Gallery Slider Styles - Simplified
+ */
+
+/* Gallery Grid */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 15px;
+    margin-bottom: 40px;
+}
+
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.05);
+}
+
+/* Modal Styles */
+.gallery-modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    overflow: hidden;
+}
+
+.modal-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.close-modal {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: #fff;
+    font-size: 40px;
+    font-weight: normal;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.slider-container {
+    position: relative;
+    width: 90%;
+    height: 90%;
+    max-width: 1200px;
+}
+
+.slider {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.slide {
+    display: none;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.slide.active {
+    display: flex !important;
+}
+
+.slide img {
+    max-width: 100%;
+    max-height: 90%;
+    object-fit: contain;
+}
+
+.image-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: none;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+}
+
+/* Simplified Navigation Buttons */
+.slider-nav {
+    position: fixed;
+    /* Fixed position so they don't move */
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    color: rgba(255, 255, 255, 0.7);
+    border: none;
+    font-size: 60px;
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: color 0.3s ease;
+}
+
+.slider-nav:hover {
+    background: none;
+    color: #fff;
+}
+
+.slider-nav.prev {
+    left: 30px;
+    border-radius: 0;
+}
+
+.slider-nav.next {
+    right: 30px;
+    border-radius: 0;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .gallery-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+
+    .gallery-item img {
+        height: 150px;
+    }
+
+    .slider-nav {
+        font-size: 40px;
+        width: 40px;
+        height: 40px;
+    }
+
+    .slider-nav.prev {
+        left: 10px;
+    }
+
+    .slider-nav.next {
+        right: 10px;
+    }
+}

@@ -2,7 +2,7 @@
 /**
  * Header template
  *
- * @package Minimalist
+ * @package Vaivera
  * @since   1.0.0
  */
 
@@ -10,13 +10,14 @@
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 <head>
-    <meta charset="<?php bloginfo( 'charset' ); ?>">
+    <meta charset="<?php bloginfo('charset'); ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#c9612c">
     <link rel="profile" href="https://gmpg.org/xfn/11">
     <script>
         // Prevent flash of unstyled content
         (function() {
-            const savedTheme = localStorage.getItem('minimalist-theme');
+            const savedTheme = localStorage.getItem('xarop-theme');
             if (savedTheme) {
                 document.documentElement.setAttribute('data-theme', savedTheme);
             } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
@@ -35,13 +36,13 @@
         <div class="header-content">
             <div class="site-branding">
                 <h1 class="site-title">
-                    <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
-                        <?php bloginfo( 'name' ); ?>
+                    <a href="<?php echo esc_url(home_url('/')); ?>" rel="home">
+                        <?php bloginfo('name'); ?>
                     </a>
                 </h1>
                 
-                <?php if ( get_bloginfo( 'description' ) ) : ?>
-                    <p class="site-description"><?php bloginfo( 'description' ); ?></p>
+                <?php if (get_bloginfo('description') ) : ?>
+                    <p class="site-description"><?php bloginfo('description'); ?></p>
                 <?php endif; ?>
             </div>
 
@@ -49,7 +50,7 @@
                 <button 
                     class="theme-toggle" 
                     id="theme-toggle" 
-                    aria-label="<?php esc_attr_e( 'Toggle dark mode', 'minimalist' ); ?>"
+                    aria-label="<?php esc_attr_e('Toggle dark mode', 'vaivera'); ?>"
                 >
                     <span class="theme-toggle-icon">
                         <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">

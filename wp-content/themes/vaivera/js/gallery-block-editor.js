@@ -1,5 +1,5 @@
 /**
- * Minimalist Image Gallery Block - Simple Version
+ * Vaivera Image Gallery Block - Simple Version
  */
 
 (function () {
@@ -7,7 +7,7 @@
 
     // Wait for WordPress to be ready
     wp.domReady(function () {
-        console.log('Registering Minimalist Image Gallery block...');
+        console.log('Registering Vaivera Image Gallery block...');
 
         // Check if required functions exist
         if (!wp.blocks || !wp.blocks.registerBlockType) {
@@ -21,15 +21,15 @@
         const { __ } = wp.i18n;
         const { createElement: el, Fragment } = wp.element;
 
-        registerBlockType('minimalist/image-gallery', {
-            title: __('Minimalist Image Gallery', 'minimalist'),
+        registerBlockType('vaivera/image-gallery', {
+            title: __('Vaivera Image Gallery', 'vaivera'),
             icon: 'format-gallery',
             category: 'media',
-            description: __('A responsive image gallery with fullscreen lightbox.', 'minimalist'),
+            description: __('A responsive image gallery with fullscreen lightbox.', 'vaivera'),
             keywords: [
-                __('gallery', 'minimalist'),
-                __('images', 'minimalist'),
-                __('lightbox', 'minimalist')
+                __('gallery', 'vaivera'),
+                __('images', 'vaivera'),
+                __('lightbox', 'vaivera')
             ],
             supports: {
                 align: ['wide', 'full'],
@@ -77,7 +77,7 @@
                 if (!images || images.length === 0) {
                     return el(
                         'div',
-                        { className: 'wp-block-minimalist-image-gallery' },
+                        { className: 'wp-block-vaivera-image-gallery' },
                         el(MediaPlaceholder, {
                             icon: 'format-gallery',
                             labels: {
@@ -102,9 +102,9 @@
                         null,
                         el(
                             PanelBody,
-                            { title: __('Gallery Settings', 'minimalist') },
+                            { title: __('Gallery Settings', 'vaivera') },
                             el(RangeControl, {
-                                label: __('Columns', 'minimalist'),
+                                label: __('Columns', 'vaivera'),
                                 value: columns,
                                 onChange: function (value) {
                                     setAttributes({ columns: value });
@@ -113,19 +113,19 @@
                                 max: 6
                             }),
                             el(SelectControl, {
-                                label: __('Spacing', 'minimalist'),
+                                label: __('Spacing', 'vaivera'),
                                 value: spacing,
                                 options: [
-                                    { label: __('Small', 'minimalist'), value: 'small' },
-                                    { label: __('Medium', 'minimalist'), value: 'medium' },
-                                    { label: __('Large', 'minimalist'), value: 'large' }
+                                    { label: __('Small', 'vaivera'), value: 'small' },
+                                    { label: __('Medium', 'vaivera'), value: 'medium' },
+                                    { label: __('Large', 'vaivera'), value: 'large' }
                                 ],
                                 onChange: function (value) {
                                     setAttributes({ spacing: value });
                                 }
                             }),
                             el(ToggleControl, {
-                                label: __('Show Captions', 'minimalist'),
+                                label: __('Show Captions', 'vaivera'),
                                 checked: showCaptions,
                                 onChange: function (value) {
                                     setAttributes({ showCaptions: value });
@@ -137,7 +137,7 @@
                     el(
                         'div',
                         {
-                            className: 'wp-block-minimalist-image-gallery gallery-columns-' + columns + ' gallery-spacing-' + spacing
+                            className: 'wp-block-vaivera-image-gallery gallery-columns-' + columns + ' gallery-spacing-' + spacing
                         },
                         el(
                             'div',
@@ -190,7 +190,7 @@
                                         el(Button, {
                                             onClick: obj.open,
                                             className: 'button button-large'
-                                        }, __('Edit Gallery', 'minimalist'))
+                                        }, __('Edit Gallery', 'vaivera'))
                                     );
                                 }
                             }

@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Get the current theme from localStorage or system preference
     function getCurrentTheme() {
-        const savedTheme = localStorage.getItem('minimalist-theme');
+        const savedTheme = localStorage.getItem('xarop-theme');
         if (savedTheme) {
             return savedTheme;
         }
@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function () {
         console.log('Applying theme:', theme);
         document.documentElement.setAttribute('data-theme', theme);
         document.body.setAttribute('data-theme', theme);
-        localStorage.setItem('minimalist-theme', theme);
+        localStorage.setItem('xarop-theme', theme);
 
         // Update button aria-label
         const label = theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode';
@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
         mediaQuery.addEventListener('change', function (e) {
             // Only auto-switch if user hasn't manually set a preference
-            if (!localStorage.getItem('minimalist-theme')) {
+            if (!localStorage.getItem('xarop-theme')) {
                 const newTheme = e.matches ? 'dark' : 'light';
                 applyTheme(newTheme);
             }

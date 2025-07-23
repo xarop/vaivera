@@ -1,7 +1,7 @@
 {
-    "name": "minimalist-theme",
+    "name": "xarop-theme",
     "version": "1.0.0",
-    "description": "A minimalist WordPress theme with custom blocks",
+    "description": "A WordPress theme with custom blocks",
     "main": "index.js",
     "scripts": {
         "build": "wp-scripts build blocks/image-gallery/index.js --output-path=blocks/image-gallery/",

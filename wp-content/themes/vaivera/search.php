@@ -2,7 +2,7 @@
 /**
  * Search results template
  *
- * @package Minimalist
+ * @package Vaivera
  * @since   1.0.0
  */
 
@@ -16,14 +16,14 @@ get_header();
                 <?php
                 printf(
                     /* translators: %s: Search query */
-                    esc_html__( 'Search Results for: %s', 'minimalist' ),
-                    '<span>' . esc_html( get_search_query() ) . '</span>'
+                    esc_html__('Search Results for: %s', 'vaivera'),
+                    '<span>' . esc_html(get_search_query()) . '</span>'
                 );
                 ?>
             </h1>
         </header>
 
-        <?php if ( have_posts() ) : ?>
+        <?php if (have_posts() ) : ?>
             <?php while ( have_posts() ) : ?>
                 <?php the_post(); ?>
                 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
@@ -32,15 +32,15 @@ get_header();
                             <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
                         </h2>
                         <div class="entry-meta">
-                            <time datetime="<?php echo esc_attr( get_the_date( 'c' ) ); ?>">
-                                <?php echo esc_html( get_the_date() ); ?>
+                            <time datetime="<?php echo esc_attr(get_the_date('c')); ?>">
+                                <?php echo esc_html(get_the_date()); ?>
                             </time>
                             <span class="author">
                                 <?php
                                 printf(
                                     /* translators: %s: Author name */
-                                    esc_html__( 'by %s', 'minimalist' ),
-                                    esc_html( get_the_author() )
+                                    esc_html__('by %s', 'vaivera'),
+                                    esc_html(get_the_author())
                                 );
                                 ?>
                             </span>
@@ -53,7 +53,7 @@ get_header();
 
                     <footer class="entry-footer">
                         <a href="<?php the_permalink(); ?>" class="read-more">
-                            <?php esc_html_e( 'Read More', 'minimalist' ); ?>
+                            <?php esc_html_e('Read More', 'vaivera'); ?>
                         </a>
                     </footer>
                 </article>
@@ -63,15 +63,15 @@ get_header();
                 <?php
                 the_posts_pagination(
                     array(
-                        'prev_text' => __( '← Previous', 'minimalist' ),
-                        'next_text' => __( 'Next →', 'minimalist' ),
+                        'prev_text' => __('← Previous', 'vaivera'),
+                        'next_text' => __('Next →', 'vaivera'),
                     )
                 );
                 ?>
             </div>
 
         <?php else : ?>
-            <p><?php esc_html_e( 'Sorry, no results found. Please try a different search.', 'minimalist' ); ?></p>
+            <p><?php esc_html_e('Sorry, no results found. Please try a different search.', 'vaivera'); ?></p>
             <?php get_search_form(); ?>
         <?php endif; ?>
     </div>

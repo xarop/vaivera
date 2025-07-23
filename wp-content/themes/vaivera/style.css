@@ -2,25 +2,28 @@
 Theme Name: Vaivera
 Description: A fast, minimalist, and responsive WordPress theme with full Gutenberg support and dark/light mode toggle
 Version: 1.0
-Author: Theme Developer
+Author: xarop.com
 Text Domain: vaivera
 */
+
+/* Import Inter font from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 /* CSS Variables for Easy Configuration */
 :root {
     /* Colors - Light Mode */
-    --color-primary: #333;
-    --color-secondary: #666;
-    --color-text: #333;
-    --color-text-light: #666;
-    --color-background: #fff;
-    --color-border: #eee;
-    --color-border-light: #f0f0f0;
-    --color-accent: #333;
-    --color-accent-hover: #555;
+    --color-primary: #c9612c;
+    --color-secondary: #4b62a7;
+    --color-text: #4b62a7;
+    --color-text-light: #6d80b9;
+    --color-background: #fbfaf6;
+    --color-border: #e9e7e0;
+    --color-border-light: #f5f3ed;
+    --color-accent: #c9612c;
+    --color-accent-hover: #b55525;
 
     /* Typography */
-    --font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    --font-family-base: 'Inter', sans-serif;
     --font-size-base: 1rem;
     --font-size-small: 0.9rem;
     --font-size-large: 1.5rem;
@@ -47,7 +50,15 @@ Text Domain: vaivera
 /* Dark Mode Variables */
 [data-theme="dark"],
 body[data-theme="dark"] {
-    --color-primary: #e0e0e0;
+    --color-primary: #e9a980;
+    --color-secondary: #8a9bd0;
+    --color-text: #a7b3d9;
+    --color-text-light: #8a9bd0;
+    --color-background: #1a1a1a;
+    --color-border: #333;
+    --color-border-light: #444;
+    --color-accent: #e9a980;
+    --color-accent-hover: #d89b75;
     --color-secondary: #ccc;
     --color-text: #e0e0e0;
     --color-text-light: #ccc;
@@ -142,8 +153,7 @@ body {
 /* Theme Toggle Button */
 .theme-toggle {
     background: none;
-    border: 1px solid var(--color-border);
-    border-radius: var(--border-radius);
+    border: none;
     padding: var(--spacing-xs);
     cursor: pointer;
     display: flex;
@@ -156,13 +166,11 @@ body {
 }
 
 .theme-toggle:hover {
-    background: var(--color-border-light);
-    border-color: var(--color-primary);
+    background: none;
 }
 
 .theme-toggle:focus {
-    outline: 2px solid var(--color-accent);
-    outline-offset: 2px;
+    outline: none;
 }
 
 .theme-toggle-icon {
@@ -408,8 +416,7 @@ img {
 /* Accessibility */
 a:focus,
 button:focus {
-    outline: 2px solid var(--color-accent);
-    outline-offset: 2px;
+    outline: none;
 }
 
 .screen-reader-text {
@@ -461,37 +468,15 @@ button:focus {
     display: block;
 }
 
-/* Debug styles - remove in production */
+/* Theme Toggle Enhancements */
 .theme-toggle {
-    position: relative;
-}
-
-.theme-toggle::after {
-    content: '';
-    position: absolute;
-    top: -2px;
-    left: -2px;
-    right: -2px;
-    bottom: -2px;
-    border: 2px solid transparent;
-    border-radius: var(--border-radius);
-    transition: border-color var(--transition-fast);
-}
-
-.theme-toggle:hover::after {
-    border-color: var(--color-accent);
-}
-
-/* Ad
-ditional Theme Toggle Enhancements */
-.theme-toggle {
-    background: var(--color-background);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background: transparent;
+    box-shadow: none;
 }
 
 [data-theme="dark"] .theme-toggle,
 body[data-theme="dark"] .theme-toggle {
-    box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
+    box-shadow: none;
 }
 
 /* Ensure theme transitions work smoothly */
@@ -506,39 +491,7 @@ body[data-theme="dark"] .theme-toggle {
     min-width: 50px;
 }
 
-/* Debug: Add a subtle indicator when dark mode is active */
-[data-theme="dark"] body::before,
-body[data-theme="dark"]::before {
-    content: "🌙 Dark Mode";
-    position: fixed;
-    top: 10px;
-    right: 10px;
-    background: var(--color-accent);
-    color: var(--color-background);
-    padding: 4px 8px;
-    border-radius: 4px;
-    font-size: 12px;
-    z-index: 9999;
-    opacity: 0.7;
-    pointer-events: none;
-}
-
-/* Debug: Add a subtle indicator when light mode is active */
-[data-theme="light"] body::before,
-body[data-theme="light"]::before {
-    content: "☀️ Light Mode";
-    position: fixed;
-    top: 10px;
-    right: 10px;
-    background: var(--color-accent);
-    color: var(--color-background);
-    padding: 4px 8px;
-    border-radius: 4px;
-    font-size: 12px;
-    z-index: 9999;
-    opacity: 0.7;
-    pointer-events: none;
-}
+/* Theme mode indicators removed */
 
 /* 
 ==========================================================================
@@ -631,8 +584,8 @@ input[type="reset"],
     padding: var(--spacing-xs) var(--spacing-lg);
     background: var(--color-accent);
     color: var(--color-background);
-    border: 1px solid var(--color-accent);
-    border-radius: var(--border-radius);
+    border: none;
+    border-radius: 0;
     font-family: var(--font-family-base);
     font-size: var(--font-size-base);
     font-weight: 500;
@@ -650,10 +603,10 @@ input[type="button"]:hover,
 input[type="reset"]:hover,
 .button:hover,
 .btn:hover {
-    background: var(--color-accent-hover);
+    /* background: var(--color-accent-hover);
     border-color: var(--color-accent-hover);
     transform: translateY(-1px);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
 }
 
 [data-theme="dark"] button:hover,
@@ -662,7 +615,7 @@ input[type="reset"]:hover,
 [data-theme="dark"] input[type="reset"]:hover,
 [data-theme="dark"] .button:hover,
 [data-theme="dark"] .btn:hover {
-    box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
+    /* box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1); */
 }
 
 button:focus,
@@ -671,8 +624,8 @@ input[type="button"]:focus,
 input[type="reset"]:focus,
 .button:focus,
 .btn:focus {
-    outline: 2px solid var(--color-accent);
-    outline-offset: 2px;
+    /* outline: 2px solid var(--color-accent);
+    outline-offset: 2px; */
 }
 
 /* Secondary Button Style */
@@ -680,7 +633,7 @@ input[type="reset"]:focus,
 .btn-secondary {
     background: transparent;
     color: var(--color-accent);
-    border-color: var(--color-accent);
+    border: none;
 }
 
 .button-secondary:hover,
@@ -944,8 +897,7 @@ input:focus-visible,
 textarea:focus-visible,
 select:focus-visible,
 button:focus-visible {
-    outline: 2px solid var(--color-accent);
-    outline-offset: 2px;
+    outline: none;
 }
 
 /* Error states */
