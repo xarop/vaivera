@@ -251,6 +251,7 @@ body[data-theme="dark"] .moon-icon {
     justify-content: center;
     gap: var(--spacing-lg);
     margin: 0;
+    padding: 0;
 }
 
 .main-navigation a {
