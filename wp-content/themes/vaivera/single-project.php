@@ -284,8 +284,8 @@ $gallery_images = get_post_meta(get_the_ID(), '_vaivera_project_gallery', true);
 }
 
 .project-title {
-    margin: 0 0 10px;
-    font-size: 1.5em;
+    /* margin: 0 0 10px;
+    font-size: 1.5em; */
 }
 
 .project-categories {
@@ -313,7 +313,7 @@ $gallery_images = get_post_meta(get_the_ID(), '_vaivera_project_gallery', true);
     }
     
     .project-title {
-        font-size: 1.2em;
+        /* font-size: 1.2em; */
     }
 }
 
