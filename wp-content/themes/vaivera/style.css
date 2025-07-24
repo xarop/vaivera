@@ -214,6 +214,7 @@ body[data-theme="dark"] .moon-icon {
 .main-navigation ul {
     list-style: none;
     display: flex;
+    justify-content: center;
     gap: var(--spacing-lg);
     margin: 0;
 }
@@ -439,14 +440,14 @@ button:focus {
     }
 
     .header-content {
-        flex-direction: column;
+        /* flex-direction: column;
         align-items: flex-start;
-        gap: var(--spacing-sm);
+        gap: var(--spacing-sm); */
     }
 
     .main-navigation ul {
-        flex-direction: column;
-        gap: var(--spacing-sm);
+        /* flex-direction: column;
+        gap: var(--spacing-sm); */
     }
 
     .site-main {

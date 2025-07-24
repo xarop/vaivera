@@ -126,6 +126,7 @@ get_header();
     cursor: pointer;
     transition: all 0.3s ease;
     position: relative;
+    color: inherit;
 }
 
 .filter-button:hover {

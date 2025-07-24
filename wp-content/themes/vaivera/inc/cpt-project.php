@@ -42,9 +42,9 @@ function vaivera_register_project_cpt()
         'show_ui'            => true,
         'show_in_menu'       => true,
         'query_var'          => true,
-        'rewrite'            => array('slug' => 'project'),
+        'rewrite'            => array('slug' => 'projects'),
         'capability_type'    => 'post',
-        'has_archive'        => true,
+        'has_archive'        => 'projects',
         'hierarchical'       => false,
         'menu_position'      => 5,
         'menu_icon'          => 'dashicons-portfolio',
@@ -145,3 +145,27 @@ function vaivera_filter_admin_bar_menu()
     }
 }
 add_action('wp_before_admin_bar_render', 'vaivera_filter_admin_bar_menu', 999);
+
+/**
+ * Flush rewrite rules on theme activation to ensure project URLs work correctly
+ */
+function vaivera_flush_rewrite_rules()
+{
+    // First, we need to re-register the post type with the new rewrite rules
+    vaivera_register_project_cpt();
+    
+    // Then flush the rules
+    flush_rewrite_rules();
+}
+
+// Register an activation hook for the theme
+add_action('after_switch_theme', 'vaivera_flush_rewrite_rules');
+
+/**
+ * Add a function to manually flush rewrite rules
+ * This can be called from the theme's functions.php if needed
+ */
+function vaivera_manual_flush_rewrite_rules()
+{
+    flush_rewrite_rules();
+}

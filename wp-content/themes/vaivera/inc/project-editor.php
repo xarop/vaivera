@@ -109,10 +109,10 @@ function vaivera_project_editor_help_text()
     
     if ($post_type === 'project' && get_current_screen()->base === 'post') {
         ?>
-        <div class="project-editor-help">
+        <!-- <div class="project-editor-help">
             <p><?php _e('Add your project description here. Use the formatting options in the toolbar to style your content.', 'vaivera'); ?></p>
             <p><?php _e('You can add images, lists, and other content using the editor buttons above.', 'vaivera'); ?></p>
-        </div>
+        </div> -->
         <style>
             .project-editor-help {
                 margin: 10px 0;
