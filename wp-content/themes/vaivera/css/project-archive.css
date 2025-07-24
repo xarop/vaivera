@@ -1,0 +1,83 @@
+/**
+ * Project Archive Styles
+ * Using semantic components from the main theme
+ *
+ * @package Vaivera
+ * @since   1.0.0
+ */
+
+/* ==========================================================================
+   PROJECT ARCHIVE LAYOUT
+   ========================================================================== */
+
+/* Use semantic page header */
+.projects-archive .page-header {
+    /* background: var(--color-border-light);
+    border-radius: var(--border-radius);
+    margin-bottom: var(--spacing-xl); */
+}
+
+/* Use semantic filter container */
+.projects-filter {
+    /* Inherits from .filter-container */
+}
+
+/* Use semantic grid system */
+.projects-grid {
+    /* Inherits from .content-grid.grid-3 */
+}
+
+/* Project items use semantic card component */
+.project-item {
+    /* Inherits from .card */
+}
+
+.project-link {
+    /* Inherits from .card-link */
+}
+
+.project-thumbnail {
+    /* Inherits from .card-media */
+}
+
+.project-overlay {
+    /* Inherits from .overlay */
+}
+
+.project-overlay-content {
+    /* Inherits from .overlay-content */
+}
+
+.project-title {
+    /* Inherits from .overlay-title */
+}
+
+.project-categories {
+    /* Inherits from .overlay-meta */
+}
+
+/* ==========================================================================
+   PROJECT SPECIFIC CUSTOMIZATIONS
+   ========================================================================== */
+
+/* Custom project card styling */
+.project-item.card {
+    position: relative;
+}
+
+/* Project filter specific styling */
+.projects-filter .filter-button.active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 2px;
+    background-color: var(--color-primary);
+}
+
+/* Project pagination */
+.projects-archive .pagination {
+    margin-top: var(--spacing-xl);
+}

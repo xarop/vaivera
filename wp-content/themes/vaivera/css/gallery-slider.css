@@ -1,33 +1,49 @@
 /**
- * Gallery Slider Styles - Simplified
+ * Gallery Slider Styles
+ * Using Vaivera theme variables for consistency
+ *
+ * @package Vaivera
+ * @since   1.0.0
  */
 
-/* Gallery Grid */
+/* ==========================================================================
+   GALLERY GRID
+   ========================================================================== */
+
 .gallery-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 15px;
-    margin-bottom: 40px;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-xl);
 }
 
 .gallery-item {
     position: relative;
     overflow: hidden;
     cursor: pointer;
+    border-radius: var(--border-radius);
+    transition: transform var(--transition-fast);
+}
+
+.gallery-item:hover {
+    transform: translateY(-2px);
 }
 
 .gallery-item img {
     width: 100%;
     height: 250px;
     object-fit: cover;
-    transition: transform 0.3s ease;
+    transition: transform var(--transition-fast);
 }
 
 .gallery-item:hover img {
     transform: scale(1.05);
 }
 
-/* Modal Styles */
+/* ==========================================================================
+   MODAL STYLES
+   ========================================================================== */
+
 .gallery-modal {
     display: none;
     position: fixed;
@@ -51,20 +67,32 @@
 
 .close-modal {
     position: absolute;
-    top: 20px;
-    right: 30px;
-    color: #fff;
-    font-size: 40px;
+    top: var(--spacing-lg);
+    right: var(--spacing-xl);
+    color: #ffffff;
+    font-size: var(--spacing-xl);
     font-weight: normal;
     cursor: pointer;
     z-index: 10;
+    transition: opacity var(--transition-fast);
+    background: none;
+    border: none;
+    padding: var(--spacing-xs);
 }
+
+.close-modal:hover {
+    opacity: 0.7;
+}
+
+/* ==========================================================================
+   SLIDER CONTAINER
+   ========================================================================== */
 
 .slider-container {
     position: relative;
     width: 90%;
     height: 90%;
-    max-width: 1200px;
+    max-width: var(--container-max-width);
 }
 
 .slider {
@@ -90,6 +118,7 @@
     max-width: 100%;
     max-height: 90%;
     object-fit: contain;
+    border-radius: var(--border-radius);
 }
 
 .image-caption {
@@ -97,51 +126,59 @@
     bottom: 0;
     left: 0;
     right: 0;
-    background: none;
-    color: #fff;
-    padding: 10px;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+    color: #ffffff;
+    padding: var(--spacing-lg) var(--spacing-md) var(--spacing-md);
     text-align: center;
+    font-size: var(--font-size-small);
+    line-height: var(--line-height-base);
 }
 
-/* Simplified Navigation Buttons */
+/* ==========================================================================
+   NAVIGATION BUTTONS
+   ========================================================================== */
+
 .slider-nav {
     position: fixed;
-    /* Fixed position so they don't move */
     top: 50%;
     transform: translateY(-50%);
     background: none;
     color: rgba(255, 255, 255, 0.7);
     border: none;
-    font-size: 60px;
-    width: 60px;
-    height: 60px;
+    font-size: 3.75rem;
+    /* 60px equivalent */
+    width: 3.75rem;
+    height: 3.75rem;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 10;
-    transition: color 0.3s ease;
+    transition: color var(--transition-fast);
+    font-family: var(--font-family-base);
 }
 
 .slider-nav:hover {
     background: none;
-    color: #fff;
+    color: #ffffff;
 }
 
 .slider-nav.prev {
-    left: 30px;
-    border-radius: 0;
+    left: var(--spacing-xl);
 }
 
 .slider-nav.next {
-    right: 30px;
-    border-radius: 0;
+    right: var(--spacing-xl);
 }
 
-/* Responsive Styles */
+/* ==========================================================================
+   RESPONSIVE STYLES
+   ========================================================================== */
+
 @media (max-width: 768px) {
     .gallery-grid {
         grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: var(--spacing-sm);
     }
 
     .gallery-item img {
@@ -149,16 +186,43 @@
     }
 
     .slider-nav {
-        font-size: 40px;
-        width: 40px;
-        height: 40px;
+        font-size: 2.5rem;
+        /* 40px equivalent */
+        width: 2.5rem;
+        height: 2.5rem;
     }
 
     .slider-nav.prev {
-        left: 10px;
+        left: var(--spacing-sm);
     }
 
     .slider-nav.next {
-        right: 10px;
+        right: var(--spacing-sm);
+    }
+
+    .close-modal {
+        top: var(--spacing-md);
+        right: var(--spacing-md);
+        font-size: var(--spacing-lg);
+    }
+
+    .image-caption {
+        padding: var(--spacing-md) var(--spacing-sm) var(--spacing-sm);
+        font-size: var(--font-size-small);
+    }
+}
+
+@media (max-width: 480px) {
+    .gallery-grid {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    }
+
+    .gallery-item img {
+        height: 120px;
+    }
+
+    .slider-container {
+        width: 95%;
+        height: 95%;
     }
 }

@@ -48,10 +48,51 @@
 
 .editor-styles-wrapper .wp-block-quote {
     border-left: 4px solid var(--color-accent, #c9612c);
-    padding-left: var(--spacing-sm, 1rem);
+    padding: var(--spacing-md, 1rem);
+    padding-left: var(--spacing-sm, 1.5rem);
     margin: var(--spacing-lg, 2rem) 0;
     font-style: italic;
+    font-size: 1.1rem;
+    line-height: 1.5;
     color: var(--color-text, #4b62a7);
+    background: var(--color-border-light, #f5f3ed);
+    border-radius: 0 var(--border-radius, 4px) var(--border-radius, 4px) 0;
+    position: relative;
+}
+
+.editor-styles-wrapper .wp-block-quote p {
+    margin-bottom: var(--spacing-xs, 0.5rem);
+    font-size: inherit;
+    line-height: inherit;
+}
+
+.editor-styles-wrapper .wp-block-quote p:last-child {
+    margin-bottom: 0;
+}
+
+.editor-styles-wrapper .wp-block-quote cite,
+.editor-styles-wrapper .wp-block-quote footer {
+    font-style: normal;
+    font-size: var(--font-size-small, 0.9rem);
+    color: var(--color-text-light, #6d80b9);
+    margin-top: var(--spacing-xs, 0.5rem);
+    display: block;
+}
+
+.editor-styles-wrapper .wp-block-quote cite:before,
+.editor-styles-wrapper .wp-block-quote footer:before {
+    content: "— ";
+}
+
+/* Large blockquote style */
+.editor-styles-wrapper .wp-block-quote.is-large,
+.editor-styles-wrapper .wp-block-quote.is-style-large {
+    font-size: 1.5rem;
+    line-height: 1.4;
+    padding: var(--spacing-lg, 2rem);
+    text-align: center;
+    border-left: none;
+    border-top: 4px solid var(--color-accent, #c9612c);
 }
 
 .editor-styles-wrapper .wp-block-image {
@@ -85,10 +126,70 @@
     margin-bottom: var(--spacing-sm, 1rem);
     padding-left: var(--spacing-lg, 2rem);
     color: var(--color-text, #4b62a7);
+    line-height: var(--line-height-base, 1.6);
+}
+
+.editor-styles-wrapper ul {
+    list-style-type: disc;
+}
+
+.editor-styles-wrapper ol {
+    list-style-type: decimal;
 }
 
 .editor-styles-wrapper li {
     margin-bottom: var(--spacing-xs, 0.5rem);
+    line-height: var(--line-height-base, 1.6);
+}
+
+.editor-styles-wrapper li:last-child {
+    margin-bottom: 0;
+}
+
+/* Nested lists in editor */
+.editor-styles-wrapper ul ul,
+.editor-styles-wrapper ol ol,
+.editor-styles-wrapper ul ol,
+.editor-styles-wrapper ol ul {
+    margin: var(--spacing-xs, 0.5rem) 0 0 0;
+    padding-left: var(--spacing-md, 1.5rem);
+}
+
+.editor-styles-wrapper ul ul {
+    list-style-type: circle;
+}
+
+.editor-styles-wrapper ul ul ul {
+    list-style-type: square;
+}
+
+/* List content in editor */
+.editor-styles-wrapper li p {
+    margin-bottom: var(--spacing-xs, 0.5rem);
+}
+
+.editor-styles-wrapper li p:last-child {
+    margin-bottom: 0;
+}
+
+/* Definition lists in editor */
+.editor-styles-wrapper dl {
+    margin: 0 0 var(--spacing-sm, 1rem) 0;
+}
+
+.editor-styles-wrapper dt {
+    font-weight: 600;
+    color: var(--color-primary, #c9612c);
+    margin-bottom: var(--spacing-xs, 0.5rem);
+}
+
+.editor-styles-wrapper dd {
+    margin: 0 0 var(--spacing-sm, 1rem) var(--spacing-md, 1.5rem);
+    color: var(--color-text, #4b62a7);
+}
+
+.editor-styles-wrapper dd:last-child {
+    margin-bottom: 0;
 }
 
 /* Code Styles */
@@ -149,4 +250,80 @@
     color: var(--color-text, #4b62a7);
     padding: var(--spacing-md, 1.5rem);
     border-radius: var(--border-radius, 4px);
+}
+
+/* ==========================================================================
+   WORDPRESS IMAGE ALIGNMENT CLASSES FOR EDITOR
+   ========================================================================== */
+
+/* Base image alignment styles */
+.editor-styles-wrapper .alignleft {
+    float: left;
+    margin: 0 var(--spacing-md, 1.5rem) var(--spacing-sm, 1rem) 0;
+}
+
+.editor-styles-wrapper .alignright {
+    float: right;
+    margin: 0 0 var(--spacing-sm, 1rem) var(--spacing-md, 1.5rem);
+}
+
+.editor-styles-wrapper .aligncenter {
+    display: block;
+    margin: 0 auto var(--spacing-sm, 1rem);
+    text-align: center;
+}
+
+.editor-styles-wrapper .alignnone {
+    margin: 0 0 var(--spacing-sm, 1rem);
+}
+
+/* WordPress image classes */
+.editor-styles-wrapper .wp-image-left,
+.editor-styles-wrapper .wp-image-right,
+.editor-styles-wrapper .wp-image-center {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Responsive styles for editor */
+@media (max-width: 768px) {
+
+    /* Reset image alignments on mobile in editor */
+    .editor-styles-wrapper .alignleft,
+    .editor-styles-wrapper .alignright {
+        float: none;
+        display: block;
+        margin: 0 auto var(--spacing-sm, 1rem);
+        max-width: 100%;
+    }
+
+    .editor-styles-wrapper .aligncenter {
+        margin: 0 auto var(--spacing-sm, 1rem);
+    }
+
+    /* Ensure images are responsive in editor */
+    .editor-styles-wrapper .wp-image-left,
+    .editor-styles-wrapper .wp-image-right,
+    .editor-styles-wrapper .wp-image-center,
+    .editor-styles-wrapper img.alignleft,
+    .editor-styles-wrapper img.alignright,
+    .editor-styles-wrapper img.aligncenter,
+    .editor-styles-wrapper img.alignnone {
+        max-width: 100%;
+        height: auto;
+    }
+
+    /* Responsive list styles in editor */
+    .editor-styles-wrapper ul,
+    .editor-styles-wrapper ol {
+        padding-left: var(--spacing-md, 1.5rem);
+        margin-bottom: var(--spacing-md, 1.5rem);
+    }
+
+    .editor-styles-wrapper ul ul,
+    .editor-styles-wrapper ol ol,
+    .editor-styles-wrapper ul ol,
+    .editor-styles-wrapper ol ul {
+        padding-left: var(--spacing-sm, 1rem);
+    }
 }

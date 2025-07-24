@@ -63,6 +63,7 @@ function vaivera_setup()
     register_nav_menus(
         array(
             'primary' => __('Primary Menu', 'vaivera'),
+            'footer'  => __('Footer Menu', 'vaivera'),
         )
     );
 }
@@ -102,6 +103,16 @@ function vaivera_scripts()
     
     // Enqueue project-related assets
     if (is_singular('project') || is_post_type_archive('project') || is_tax('project_category')) {
+        // Enqueue project archive styles for archive pages
+        if (is_post_type_archive('project') || is_tax('project_category')) {
+            wp_enqueue_style(
+                'vaivera-project-archive',
+                get_template_directory_uri() . '/css/project-archive.css',
+                array('vaivera-style'),
+                '1.0'
+            );
+        }
+        
         // Enqueue project content styles
         wp_enqueue_style(
             'vaivera-project-content',
