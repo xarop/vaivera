@@ -24,6 +24,9 @@ require_once get_template_directory() . '/inc/project-editor.php';
 // Include meta boxes
 require_once get_template_directory() . '/inc/project-metaboxes.php';
 
+// Include homepage meta boxes
+require_once get_template_directory() . '/inc/homepage-metaboxes.php';
+
 /**
  * Theme setup function.
  *
@@ -100,6 +103,24 @@ function vaivera_scripts()
         '1.0',
         true
     );
+
+    // Enqueue unified slider script
+    if (is_front_page() || is_singular('project') || is_post_type_archive('project') || is_tax('project_category')) {
+        wp_enqueue_script(
+            'vaivera-unified-slider',
+            get_template_directory_uri() . '/assets/js/unified-slider.js',
+            array('jquery'),
+            '1.0',
+            true
+        );
+        
+        wp_enqueue_style(
+            'vaivera-unified-slider',
+            get_template_directory_uri() . '/assets/css/unified-slider.css',
+            array('vaivera-style'),
+            '1.0'
+        );
+    }
     
     // Enqueue project-related assets
     if (is_singular('project') || is_post_type_archive('project') || is_tax('project_category')) {
@@ -121,21 +142,7 @@ function vaivera_scripts()
             '1.0'
         );
         
-        // Enqueue gallery slider styles
-        wp_enqueue_style(
-            'vaivera-gallery-slider',
-            get_template_directory_uri() . '/css/gallery-slider.css',
-            array(),
-            '1.0'
-        );
-        
-        wp_enqueue_script(
-            'vaivera-gallery-slider',
-            get_template_directory_uri() . '/js/gallery-slider.js',
-            array('jquery'),
-            '1.0',
-            true
-        );
+
     }
 
     // Only load scripts when needed.
@@ -295,6 +302,8 @@ function vaivera_customize_register( $wp_customize )
             )
         )
     );
+
+
 }
 add_action('customize_register', 'vaivera_customize_register');
 
