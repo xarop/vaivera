@@ -154,13 +154,13 @@
     function initProjectGallery() {
         // Variables
         var modal = $('#galleryModal');
-        var slides = $('.slide');
+        var slides = $('.gallery-modal .carousel-slide');
         var currentSlide = 0;
 
         // Initialize - make sure slides are properly set up
         function initializeSlider() {
-            slides = $('.slide'); // Refresh slides collection
-            slides.hide(); // Hide all slides first
+            slides = $('.gallery-modal .carousel-slide'); // Refresh slides collection
+            slides.removeClass('active'); // Remove active class from all slides
         }
 
         // Open modal and show clicked image
@@ -193,14 +193,14 @@
         });
 
         // Navigate slides
-        $('.slider-nav.prev').on('click', function (e) {
+        $('.gallery-modal .carousel-prev').on('click', function (e) {
             e.preventDefault();
             e.stopPropagation();
             currentSlide = (currentSlide - 1 + slides.length) % slides.length;
             showSlide(currentSlide);
         });
 
-        $('.slider-nav.next').on('click', function (e) {
+        $('.gallery-modal .carousel-next').on('click', function (e) {
             e.preventDefault();
             e.stopPropagation();
             currentSlide = (currentSlide + 1) % slides.length;
@@ -225,19 +225,19 @@
 
         // Show slide
         function showSlide(index) {
-            slides.removeClass('active').hide();
-            $(slides[index]).addClass('active').show();
+            slides.removeClass('active');
+            $(slides[index]).addClass('active');
         }
 
         // Swipe support for touch devices
         var touchStartX = 0;
         var touchEndX = 0;
 
-        $('.slider').on('touchstart', function (e) {
+        $('.gallery-modal .carousel-slides').on('touchstart', function (e) {
             touchStartX = e.originalEvent.touches[0].clientX;
         });
 
-        $('.slider').on('touchend', function (e) {
+        $('.gallery-modal .carousel-slides').on('touchend', function (e) {
             touchEndX = e.originalEvent.changedTouches[0].clientX;
             handleSwipe();
         });

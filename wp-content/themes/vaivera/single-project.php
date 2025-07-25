@@ -68,23 +68,26 @@ $gallery_images = get_post_meta(get_the_ID(), '_vaivera_project_gallery', true);
                         <div class="modal-content">
                             <span class="close-modal">&times;</span>
                             
-                            <div class="slider-container">
-                                <div class="slider">
-                                    <?php foreach ($gallery_images as $image_id) : ?>
-                                        <div class="slide">
-                                            <?php echo wp_get_attachment_image($image_id, 'full'); ?>
-                                            <?php if (wp_get_attachment_caption($image_id)) : ?>
-                                                <div class="image-caption">
-                                                    <?php echo wp_get_attachment_caption($image_id); ?>
-                                                </div>
-                                            <?php endif; ?>
-                                        </div>
-                                    <?php endforeach; ?>
-                                </div>
-                                
-                                <button type="button" class="slider-nav prev">←</button>
-                                <button type="button" class="slider-nav next">→</button>
-                            </div>
+                            <?php
+                            // Configure gallery carousel
+                            $carousel_config = array(
+                                'images' => array_map(function($image_id) {
+                                    return array(
+                                        'id' => $image_id,
+                                        'size' => 'full',
+                                        'caption' => wp_get_attachment_caption($image_id)
+                                    );
+                                }, $gallery_images),
+                                'container_class' => 'gallery-carousel',
+                                'show_indicators' => false,
+                                'show_captions' => true,
+                                'show_navigation' => true,
+                                'image_size' => 'full'
+                            );
+                            
+                            set_query_var('carousel_config', $carousel_config);
+                            get_template_part('partials/carousel');
+                            ?>
                         </div>
                     </div>
                 <?php endif; ?>
