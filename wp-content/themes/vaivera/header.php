@@ -31,34 +31,4 @@
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 
-<header class="site-header">
-    <div class="container">
-        <div class="header-content">
-            <div class="site-branding">
-                <h1 class="site-title">
-                    <a href="<?php echo esc_url(home_url('/')); ?>" rel="home">
-                        <?php bloginfo('name'); ?>
-                    </a>
-                </h1>
-            </div>
-
-            <?php if (get_bloginfo('description') ) : ?>
-                <div class="site-description-container">
-                    <p class="site-description"><?php bloginfo('description'); ?></p>
-                </div>
-            <?php endif; ?>
-
-            <nav class="main-navigation">
-                <?php
-                wp_nav_menu(
-                    array(
-                        'theme_location' => 'primary',
-                        'menu_id'        => 'primary-menu',
-                        'fallback_cb'    => false,
-                    )
-                );
-                ?>
-            </nav>
-        </div>
-    </div>
-</header>
+<?php get_template_part('partials/site-header'); ?>

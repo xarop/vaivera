@@ -172,19 +172,27 @@ a:focus {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: var(--spacing-md);
 }
 
 .site-branding {
     flex: 1;
 }
 
+.site-navigation {
+    max-width: 800px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
 .site-description-container {
     flex: 1;
-    text-align: center;
 }
 
 .main-navigation {
     flex: 1;
+
 }
 
 .site-title {
@@ -193,6 +201,11 @@ a:focus {
     text-decoration: none;
     color: var(--color-primary);
     margin: 0;
+    margin-bottom: var(--spacing-xs);
+}
+
+.site-title-description {
+    display: none;
 }
 
 .site-title a {
@@ -943,6 +956,12 @@ button:focus {
     .main-navigation ul {
         justify-content: center;
         gap: var(--spacing-md);
+    }
+
+    .site-navigation {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+        text-align: center;
     }
 
     .site-main {
@@ -2032,8 +2051,8 @@ input[type="file"]:hover {
     }
 
     .filter-categories {
-        flex-direction: column;
-        align-items: center;
+        /* flex-direction: column;
+        align-items: center; */
     }
 
     .page-header {
@@ -2063,6 +2082,10 @@ input[type="file"]:hover {
 /* Homepage Header */
 .homepage-header {
     flex-shrink: 0;
+    z-index: 10;
+}
+
+.homepage-header-wrapper .site-header {
     z-index: 10;
 }
 
@@ -2261,6 +2284,14 @@ Responsive Homepage Styles */
     .homepage-header .main-navigation {
         flex: none;
         width: 100%;
+    }
+
+    .site-description {
+        display: none;
+    }
+
+    .site-title-description {
+        display: inline;
     }
 
     .homepage-header .site-description-container {
