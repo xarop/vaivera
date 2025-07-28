@@ -2090,10 +2090,20 @@ input[type="file"]:hover {
 }
 
 .homepage-carousel::before {
+    position: fixed;
     top: 40px;
     width: 105px;
     height: 114px;
     background-image: url('data:image/svg+xml;utf8,<svg width="105" height="114" viewBox="0 0 105 114" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M83.11 0.0200005L52.47 108.58L23.96 0.0200005H0.589996L32.17 113.41H71.16L104.91 0.0200005H83.11Z" fill="%23E8571A"/></svg>');
+}
+
+/* Fixed positioning when scrolling past the ::after element */
+.homepage-carousel.logo-fixed::before {
+    position: absolute;
+    top: auto;
+    bottom: 180px;
+    left: 40px;
+    z-index: 30;
 }
 
 .homepage-carousel::after {

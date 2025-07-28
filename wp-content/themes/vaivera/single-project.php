@@ -81,7 +81,7 @@ $photograph = get_post_meta(get_the_ID(), '_vaivera_project_photograph', true);
                                 
                                 <?php if (!empty($budget)) : ?>
                                     <dt><?php _e('PRESSUPOST', 'vaivera'); ?></dt>
-                                    <dd><?php echo esc_html(number_format($budget, 2, ',', '.')); ?> €</dd>
+                                    <dd><?php echo esc_html(number_format($budget, 0, ',', '.')); ?> €</dd>
                                 <?php endif; ?>
                             </dl>
 

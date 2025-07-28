@@ -202,6 +202,17 @@ function vaivera_scripts()
         );
     }
     
+    // Enqueue carousel logo positioning script for homepage
+    if (is_front_page()) {
+        wp_enqueue_script(
+            'vaivera-carousel-logo',
+            get_template_directory_uri() . '/js/carousel-logo.js',
+            array(),
+            '1.0',
+            true
+        );
+    }
+    
     // Enqueue project-related assets
     if (is_singular('project') || is_post_type_archive('project') || is_tax('project_category')) {
         // Enqueue project archive styles for archive pages
