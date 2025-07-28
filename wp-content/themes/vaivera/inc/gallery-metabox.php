@@ -64,7 +64,7 @@ function vaivera_gallery_meta_box_callback($post)
     ?>
     <div class="vaivera-gallery-metabox">
         <p class="description">
-            <?php _e('Select images for the carousel gallery. These images will be displayed in the carousel on the homepage and can be viewed in a modal gallery on project pages.', 'vaivera'); ?>
+            <?php _e('Select images for the carousel gallery. For the homepage, these images will be displayed in the main carousel. For projects and other pages, these images can be viewed in a modal gallery.', 'vaivera'); ?>
         </p>
         
         <div class="gallery-field-wrapper">

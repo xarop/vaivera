@@ -76,6 +76,81 @@ function vaivera_setup()
 add_action('after_setup_theme', 'vaivera_setup');
 
 /**
+ * Register widget areas.
+ *
+ * @since  1.0.0
+ * @return void
+ */
+function vaivera_widgets_init()
+{
+    // Footer Widget Area 1
+    register_sidebar(
+        array(
+            'name'          => __('Footer Widget 1', 'vaivera'),
+            'id'            => 'footer-1',
+            'description'   => __('Add widgets here to appear in the first footer column.', 'vaivera'),
+            'before_widget' => '<div id="%1$s" class="widget %2$s">',
+            'after_widget'  => '</div>',
+            'before_title'  => '<h3 class="widget-title">',
+            'after_title'   => '</h3>',
+        )
+    );
+
+    // Footer Widget Area 2
+    register_sidebar(
+        array(
+            'name'          => __('Footer Widget 2', 'vaivera'),
+            'id'            => 'footer-2',
+            'description'   => __('Add widgets here to appear in the second footer column.', 'vaivera'),
+            'before_widget' => '<div id="%1$s" class="widget %2$s">',
+            'after_widget'  => '</div>',
+            'before_title'  => '<h3 class="widget-title">',
+            'after_title'   => '</h3>',
+        )
+    );
+
+    // Footer Widget Area 3
+    register_sidebar(
+        array(
+            'name'          => __('Footer Widget 3', 'vaivera'),
+            'id'            => 'footer-3',
+            'description'   => __('Add widgets here to appear in the third footer column.', 'vaivera'),
+            'before_widget' => '<div id="%1$s" class="widget %2$s">',
+            'after_widget'  => '</div>',
+            'before_title'  => '<h3 class="widget-title">',
+            'after_title'   => '</h3>',
+        )
+    );
+
+    // Footer Widget Area 4
+    register_sidebar(
+        array(
+            'name'          => __('Footer Widget 4', 'vaivera'),
+            'id'            => 'footer-4',
+            'description'   => __('Add widgets here to appear in the fourth footer column.', 'vaivera'),
+            'before_widget' => '<div id="%1$s" class="widget %2$s">',
+            'after_widget'  => '</div>',
+            'before_title'  => '<h3 class="widget-title">',
+            'after_title'   => '</h3>',
+        )
+    );
+
+    // Footer Bottom Banner Widget Area
+    register_sidebar(
+        array(
+            'name'          => __('Footer Bottom Banner', 'vaivera'),
+            'id'            => 'footer-bottom',
+            'description'   => __('Add widgets here for a centered full-width banner above the copyright.', 'vaivera'),
+            'before_widget' => '<div id="%1$s" class="widget %2$s">',
+            'after_widget'  => '</div>',
+            'before_title'  => '<h3 class="widget-title">',
+            'after_title'   => '</h3>',
+        )
+    );
+}
+add_action('widgets_init', 'vaivera_widgets_init');
+
+/**
  * Enqueue styles and scripts.
  *
  * @since  1.0.0
@@ -454,13 +529,3 @@ function vaivera_register_blocks()
     register_block_type(get_template_directory() . '/blocks/image-gallery');
 }
 add_action('init', 'vaivera_register_blocks');
-
-
-
-
-
-
-
-
-
-

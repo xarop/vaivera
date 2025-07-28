@@ -47,7 +47,7 @@ if ($projects_query->have_posts()) : ?>
                 <?php endif; ?>
             </div>
             
-            <div class="projects-grid content-grid grid-3">
+            <div class="projects-grid content-grid grid-2">
                 <?php while ($projects_query->have_posts()) : $projects_query->the_post(); ?>
                     <?php get_template_part('partials/project-card'); ?>
                 <?php endwhile; ?>

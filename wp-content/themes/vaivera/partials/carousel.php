@@ -11,14 +11,25 @@ $carousel_images = isset($args['images']) ? $args['images'] : array();
 $show_indicators = isset($args['indicators']) ? $args['indicators'] : true;
 $show_navigation = isset($args['navigation']) ? $args['navigation'] : true;
 
-// If no images provided, try to get from homepage meta
+// If no images provided, try to get from current page meta
 if (empty($carousel_images)) {
-    $homepage_id = get_option('page_on_front');
-    if (!$homepage_id) {
-        $homepage_id = get_the_ID();
-    }
+    // Use the passed page_id, homepage_id, or current page
+
+    $page_id = get_the_ID();
     
-    $carousel_gallery = get_post_meta($homepage_id, 'homepage_carousel_gallery', true);
+    // Debug: You can temporarily uncomment this to see what's happening
+    // error_log("Carousel Debug - Page ID: " . $page_id);
+    
+    // Try the unified gallery metabox key first
+    $carousel_gallery = get_post_meta($page_id, 'carousel_gallery', true);
+    
+    // // Fallback to old homepage carousel key if we're on homepage and no unified gallery
+    // if (empty($carousel_gallery) && (is_front_page() || isset($args['homepage_id']) || isset($args['page_id']))) {
+    //     $carousel_gallery = get_post_meta($page_id, 'homepage_carousel_gallery', true);
+    // }
+    
+    // Debug: You can temporarily uncomment this to see what's happening
+    // error_log("Carousel Debug - Gallery meta: " . $carousel_gallery);
     
     if (!empty($carousel_gallery)) {
         $image_ids = explode(',', $carousel_gallery);

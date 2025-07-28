@@ -14,13 +14,22 @@ get_header();
         <?php while ( have_posts() ) : ?>
             <?php the_post(); ?>
             <article id="page-<?php the_ID(); ?>" <?php post_class(); ?>>
-                <header class="entry-header">
-                    <h1 class="entry-title"><?php the_title(); ?></h1>
-                </header>
+                <section>
+                    <aside>
+                        <header class="entry-header">
+                            <h1 class="entry-title"><?php the_title(); ?></h1>
+                        </header>
+                    </aside>
 
-                <div class="entry-content">
-                    <?php the_content(); ?>
-                </div>
+                    <div class="entry-content">
+                        <?php the_content(); ?>
+                    </div>
+                    
+                </section>
+
+                <!-- Gallery -->
+                <?php get_template_part('partials/universal-gallery'); ?>
+
             </article>
         <?php endwhile; ?>
     </div>

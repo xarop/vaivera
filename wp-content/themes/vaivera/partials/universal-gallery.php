@@ -21,9 +21,10 @@ if (!empty($gallery_images)) :
     $image_ids = array_filter($image_ids); // Remove empty values
     
     if (!empty($image_ids)) : ?>
-        <div class="universal-gallery">
-            <h2><?php _e("Galeria d'imatges", 'vaivera'); ?></h2>
-            
+        <section class="universal-gallery">
+            <aside>
+                <h2><?php _e("Galeria d'imatges", 'vaivera'); ?></h2>
+            </aside>
             <div class="gallery-grid">
                 <?php foreach ($image_ids as $index => $image_id) : ?>
                     <div class="gallery-item">
@@ -35,7 +36,7 @@ if (!empty($gallery_images)) :
                     </div>
                 <?php endforeach; ?>
             </div>
-        </div>
+        </section>
         
         <!-- Gallery Slider Modal -->
         <div class="gallery-modal" id="galleryModal">

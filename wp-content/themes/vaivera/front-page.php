@@ -34,18 +34,34 @@
 <div class="homepage-container">
     <!-- Homepage Image Carousel -->
     <div class="homepage-carousel">
-        <?php get_template_part('partials/carousel'); ?>
+        <?php 
+        // Get the homepage ID
+        $homepage_id = get_option('page_on_front');
+        if (!$homepage_id) {
+            // If no static front page is set, get the current page ID
+            global $wp_query;
+            if ($wp_query->is_posts_page) {
+                $homepage_id = get_option('page_for_posts');
+            } else {
+                $homepage_id = get_the_ID();
+            }
+        }
+        
+        // Pass the homepage ID to ensure it gets images from the homepage
+        get_template_part('partials/carousel', null, array('page_id' => $homepage_id)); 
+        ?>
     </div>
 
     <!-- Header after carousel -->
     <div class="homepage-header-wrapper">
-        <?php get_template_part('partials/site-header'); ?>
+        <?php get_template_part('partials/site-header'); ?>     
     </div>
 </div>
 
 <!-- Homepage Content -->
 <main class="site-main homepage-main">
-    <div class="container">
+    <section class="container">
+        <aside></aside>
         <?php
         // Get the homepage content
         $page_id = get_option('page_on_front');
@@ -60,7 +76,7 @@
             }
         }
         ?>
-    </div>
+    </section>
 
     <!-- Projects Archive Section -->
     <?php get_template_part('partials/projects-archive'); ?>

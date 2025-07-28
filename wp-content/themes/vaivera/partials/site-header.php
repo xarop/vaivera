@@ -9,17 +9,18 @@
  */
 ?>
 
+
 <header class="site-header">
     <div class="container">
         <div class="header-content">
-            <div class="site-branding">
+            <aside class="site-branding">
                 <h1 class="site-title">
                     <a href="<?php echo esc_url(home_url('/')); ?>" rel="home">
                         <?php bloginfo('name'); ?>
                         <span class="site-title-description"><?php bloginfo('description'); ?></span>
                     </a>
                 </h1>
-            </div>
+            </aside>
             <div class="site-navigation">
                 <?php if (get_bloginfo('description') ) : ?>
                     <div class="site-description-container">
