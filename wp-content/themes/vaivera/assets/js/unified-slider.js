@@ -14,9 +14,9 @@
     });
 
     // Also initialize on window load as backup
-    $(window).on('load', function() {
+    $(window).on('load', function () {
         // Re-check gallery links after page fully loads
-        setTimeout(function() {
+        setTimeout(function () {
             console.log('Window loaded - Gallery links found:', $('.gallery-link').length);
             console.log('Gallery modal found:', $('#galleryModal').length);
         }, 100);
@@ -78,7 +78,7 @@
         // Initialize carousel
         if (slides.length > 0) {
             showSlide(0);
-            
+
             // Only start autoplay if there are multiple slides
             if (slides.length > 1) {
                 startAutoplay();
@@ -167,163 +167,135 @@
      * Project Gallery Functionality
      */
     function initProjectGallery() {
-        // Variables
-        var modal = $('#galleryModal');
-        var slides = $('.gallery-modal .carousel-slide');
-        var currentSlide = 0;
+        const modal = document.getElementById('galleryModal');
+        if (!modal) return;
 
-        // Debug: Check initial state
-        console.log('initProjectGallery called');
-        console.log('Modal found:', modal.length);
-        console.log('Gallery links found:', $('.gallery-link').length);
+        let currentSlide = 0;
+        let slides = [];
 
-        // Initialize - refresh slides collection
-        function initializeSlider() {
-            slides = $('.gallery-modal .carousel-slide');
-            slides.removeClass('active');
+        // Initialize modal carousel
+        function initModalCarousel() {
+            const carousel = modal.querySelector('.carousel-container');
+            if (!carousel) return;
+
+            slides = carousel.querySelectorAll('.carousel-slide');
+            const prevBtn = carousel.querySelector('.carousel-prev');
+            const nextBtn = carousel.querySelector('.carousel-next');
+
+            // Show specific slide
+            function showSlide(index) {
+                slides.forEach(slide => slide.classList.remove('active'));
+                if (slides[index]) {
+                    slides[index].classList.add('active');
+                }
+                currentSlide = index;
+            }
+
+            // Navigation
+            if (prevBtn) {
+                prevBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const prev = (currentSlide - 1 + slides.length) % slides.length;
+                    showSlide(prev);
+                });
+            }
+
+            if (nextBtn) {
+                nextBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const next = (currentSlide + 1) % slides.length;
+                    showSlide(next);
+                });
+            }
+
+            // Keyboard navigation
+            function handleKeydown(e) {
+                if (!modal.style.display || modal.style.display === 'none') return;
+
+                if (e.key === 'Escape') {
+                    closeModal();
+                } else if (e.key === 'ArrowLeft') {
+                    const prev = (currentSlide - 1 + slides.length) % slides.length;
+                    showSlide(prev);
+                } else if (e.key === 'ArrowRight') {
+                    const next = (currentSlide + 1) % slides.length;
+                    showSlide(next);
+                }
+            }
+
+            document.addEventListener('keydown', handleKeydown);
+
+            // Touch/swipe support
+            let touchStartX = 0;
+            let touchEndX = 0;
+
+            carousel.addEventListener('touchstart', (e) => {
+                touchStartX = e.touches[0].clientX;
+            });
+
+            carousel.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].clientX;
+                const diff = touchStartX - touchEndX;
+                const swipeThreshold = 50;
+
+                if (Math.abs(diff) > swipeThreshold) {
+                    if (diff > 0) {
+                        // Swipe left - next slide
+                        const next = (currentSlide + 1) % slides.length;
+                        showSlide(next);
+                    } else {
+                        // Swipe right - previous slide
+                        const prev = (currentSlide - 1 + slides.length) % slides.length;
+                        showSlide(prev);
+                    }
+                }
+            });
+
+            return { showSlide };
         }
 
-        // Open modal and show clicked image (using event delegation)
-        $(document).on('click', '.gallery-link', function (e) {
-            e.preventDefault();
+        // Open modal
+        function openModal(slideIndex = 0) {
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
 
-            console.log('Gallery link clicked'); // Debug log
-
-            currentSlide = parseInt($(this).data('index'));
-
-            // Debug: Check if modal exists
-            console.log('Modal element found:', modal.length);
-
-            // Show modal first
-            modal.fadeIn();
-
-            // Wait a moment for modal content to be ready, then initialize
-            setTimeout(function () {
-                slides = $('.gallery-modal .carousel-slide'); // Refresh slides collection in modal
-                slides.removeClass('active'); // Remove active class from all slides
-
-                // Debug: log the number of slides found
-                console.log('Gallery modal slides found:', slides.length);
-                console.log('Current slide index:', currentSlide);
-
-                if (slides.length > 0) {
-                    showSlide(currentSlide);
-                } else {
-                    console.error('No carousel slides found in gallery modal');
+            setTimeout(() => {
+                const modalCarousel = initModalCarousel();
+                if (modalCarousel && slides.length > 0) {
+                    modalCarousel.showSlide(slideIndex);
                 }
-            }, 150);
-
-            // Disable body scroll
-            $('body').css('overflow', 'hidden');
-        });
-
-        // Close modal (using event delegation)
-        $(document).on('click', '.close-modal', function () {
-            modal.fadeOut();
-
-            // Enable body scroll
-            $('body').css('overflow', '');
-        });
-
-        // Close modal when clicking outside content
-        $(modal).on('click', function (e) {
-            if (e.target === modal[0]) {
-                modal.fadeOut();
-                $('body').css('overflow', '');
-            }
-        });
-
-        // Navigate slides
-        $('.gallery-modal .carousel-prev').on('click', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-            
-            // Refresh slides in case they weren't found initially
-            slides = $('.gallery-modal .carousel-slide');
-            if (slides.length > 0) {
-                currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-                showSlide(currentSlide);
-            }
-        });
-
-        $('.gallery-modal .carousel-next').on('click', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-            
-            // Refresh slides in case they weren't found initially
-            slides = $('.gallery-modal .carousel-slide');
-            if (slides.length > 0) {
-                currentSlide = (currentSlide + 1) % slides.length;
-                showSlide(currentSlide);
-            }
-        });
-
-        // Keyboard navigation
-        $(document).on('keydown', function (e) {
-            if (!modal.is(':visible')) return;
-
-            if (e.key === 'Escape') {
-                modal.fadeOut();
-                $('body').css('overflow', '');
-            } else if (e.key === 'ArrowLeft') {
-                slides = $('.gallery-modal .carousel-slide');
-                if (slides.length > 0) {
-                    currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-                    showSlide(currentSlide);
-                }
-            } else if (e.key === 'ArrowRight') {
-                slides = $('.gallery-modal .carousel-slide');
-                if (slides.length > 0) {
-                    currentSlide = (currentSlide + 1) % slides.length;
-                    showSlide(currentSlide);
-                }
-            }
-        });
-
-        // Show slide
-        function showSlide(index) {
-            console.log('showSlide called with index:', index);
-            console.log('Total slides:', slides.length);
-            
-            slides.removeClass('active');
-            if (slides[index]) {
-                $(slides[index]).addClass('active');
-                console.log('Activated slide:', index);
-            } else {
-                console.error('Slide not found at index:', index);
-            }
+            }, 100);
         }
 
-        // Swipe support for touch devices
-        var touchStartX = 0;
-        var touchEndX = 0;
-
-        $('.gallery-modal .carousel-slides').on('touchstart', function (e) {
-            touchStartX = e.originalEvent.touches[0].clientX;
-        });
-
-        $('.gallery-modal .carousel-slides').on('touchend', function (e) {
-            touchEndX = e.originalEvent.changedTouches[0].clientX;
-            handleSwipe();
-        });
-
-        function handleSwipe() {
-            if (touchStartX - touchEndX > 50) {
-                // Swipe left
-                slides = $('.gallery-modal .carousel-slide');
-                if (slides.length > 0) {
-                    currentSlide = (currentSlide + 1) % slides.length;
-                    showSlide(currentSlide);
-                }
-            } else if (touchEndX - touchStartX > 50) {
-                // Swipe right
-                slides = $('.gallery-modal .carousel-slide');
-                if (slides.length > 0) {
-                    currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-                    showSlide(currentSlide);
-                }
-            }
+        // Close modal
+        function closeModal() {
+            modal.style.display = 'none';
+            document.body.style.overflow = '';
         }
+
+        // Event delegation for gallery links
+        document.addEventListener('click', (e) => {
+            if (e.target.matches('.gallery-link') || e.target.closest('.gallery-link')) {
+                e.preventDefault();
+                const link = e.target.matches('.gallery-link') ? e.target : e.target.closest('.gallery-link');
+                const slideIndex = parseInt(link.dataset.index) || 0;
+                openModal(slideIndex);
+            }
+        });
+
+        // Close modal events
+        const closeBtn = modal.querySelector('.close-modal');
+        if (closeBtn) {
+            closeBtn.addEventListener('click', closeModal);
+        }
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
     }
 
 })(jQuery);

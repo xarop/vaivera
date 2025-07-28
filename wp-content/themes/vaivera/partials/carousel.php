@@ -1,67 +1,69 @@
-<div class="carousel-container">
-        <div class="carousel-slides">
-            <?php
-            // Get the page ID
-            $page_id = get_the_ID();
-            
-            // Check if we're in gallery modal context
-            $is_modal = get_query_var('gallery_modal_context', false);
-            
-            // Get carousel images from gallery meta field
-            $carousel_gallery = get_post_meta($page_id, 'carousel_gallery', true);
-            $carousel_images = array();
-            
-            if (!empty($carousel_gallery)) {
-                $image_ids = explode(',', $carousel_gallery);
-                foreach ($image_ids as $image_id) {
-                    $image_id = intval(trim($image_id));
-                    if ($image_id) {
-                        $image_url = wp_get_attachment_image_url($image_id, 'full');
-                        $image_alt = get_post_meta($image_id, '_wp_attachment_image_alt', true);
-                        $image_caption = wp_get_attachment_caption($image_id);
-                        if ($image_url) {
-                            $carousel_images[] = array(
-                                'url' => $image_url,
-                                'alt' => $image_alt ?: sprintf(__('Carousel Image %d', 'vaivera'), count($carousel_images) + 1),
-                                'caption' => $image_caption
-                            );
-                        }
-                    }
+<?php
+/**
+ * Carousel Partial
+ *
+ * @package Vaivera
+ * @since   1.0.0
+ */
+
+// Get carousel images - can be passed as parameter or use default logic
+$carousel_images = isset($args['images']) ? $args['images'] : array();
+$show_indicators = isset($args['indicators']) ? $args['indicators'] : true;
+$show_navigation = isset($args['navigation']) ? $args['navigation'] : true;
+
+// If no images provided, try to get from homepage meta
+if (empty($carousel_images)) {
+    $homepage_id = get_option('page_on_front');
+    if (!$homepage_id) {
+        $homepage_id = get_the_ID();
+    }
+    
+    $carousel_gallery = get_post_meta($homepage_id, 'homepage_carousel_gallery', true);
+    
+    if (!empty($carousel_gallery)) {
+        $image_ids = explode(',', $carousel_gallery);
+        foreach ($image_ids as $image_id) {
+            $image_id = intval(trim($image_id));
+            if ($image_id) {
+                $image_url = wp_get_attachment_image_url($image_id, 'full');
+                $image_alt = get_post_meta($image_id, '_wp_attachment_image_alt', true);
+                if ($image_url) {
+                    $carousel_images[] = array(
+                        'url' => $image_url,
+                        'alt' => $image_alt ?: sprintf(__('Carousel Image %d', 'vaivera'), count($carousel_images) + 1)
+                    );
                 }
             }
-            
-            // If no images are set, show a placeholder message (only for homepage)
-            if (empty($carousel_images) && !$is_modal) {
-                $carousel_images = array(
-                    array(
-                        'url' => 'https://via.placeholder.com/1920x1080/c9612c/ffffff?text=Add+Carousel+Images+in+Homepage+Settings',
-                        'alt' => 'Placeholder - Add images in gallery field',
-                        'caption' => ''
-                    )
-                );
-            }
-            
-            foreach ($carousel_images as $index => $image) :
-                $active_class = $index === 0 ? ' active' : '';
-                ?>
-                <div class="carousel-slide<?php echo $active_class; ?>">
-                    <img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>">
-                    <?php if ($is_modal && !empty($image['caption'])) : ?>
-                        <div class="image-caption">
-                            <?php echo esc_html($image['caption']); ?>
-                        </div>
-                    <?php endif; ?>
-                </div>
-            <?php endforeach; ?>
-        </div>
-        
+        }
+    }
+}
+
+// If still no images, don't show anything (removed placeholder)
+if (empty($carousel_images)) {
+    return;
+}
+?>
+
+<div class="carousel-container">
+    <div class="carousel-slides">
+        <?php foreach ($carousel_images as $index => $image) : ?>
+            <?php $active_class = $index === 0 ? ' active' : ''; ?>
+            <div class="carousel-slide<?php echo $active_class; ?>">
+                <img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>">
+            </div>
+        <?php endforeach; ?>
+    </div>
+    
+    <?php if ($show_navigation && count($carousel_images) > 1) : ?>
         <!-- Carousel Navigation -->
         <div class="carousel-nav">
-            <button class="carousel-prev slider-nav prev" aria-label="<?php esc_attr_e('Previous slide', 'vaivera'); ?>">‹</button>
-            <button class="carousel-next slider-nav next" aria-label="<?php esc_attr_e('Next slide', 'vaivera'); ?>">›</button>
+            <button class="carousel-prev slider-nav prev" aria-label="<?php esc_attr_e('Previous slide', 'vaivera'); ?>">&#8249;</button>
+            <button class="carousel-next slider-nav next" aria-label="<?php esc_attr_e('Next slide', 'vaivera'); ?>">&#8250;</button>
         </div>
-        
-      
+    <?php endif; ?>
+    
+    <?php if ($show_indicators && count($carousel_images) > 1) : ?>
+        <!-- Carousel Indicators -->
         <div class="carousel-indicators">
             <?php foreach ($carousel_images as $index => $image) : ?>
                 <button class="carousel-indicator<?php echo $index === 0 ? ' active' : ''; ?>" 
@@ -70,5 +72,5 @@
                 </button>
             <?php endforeach; ?>
         </div>
-       
+    <?php endif; ?>
 </div>
