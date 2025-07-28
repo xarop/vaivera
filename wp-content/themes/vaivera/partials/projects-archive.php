@@ -7,22 +7,24 @@
  */
 
 // Query projects
-$projects_query = new WP_Query(array(
+$projects_query = new WP_Query(
+    array(
     'post_type' => 'project',
     'posts_per_page' => -1, // Show all projects
     'post_status' => 'publish',
     'orderby' => 'date',
     'order' => 'DESC'
-));
+    )
+);
 
 if ($projects_query->have_posts()) : ?>
     <section class="projects-section">
         <div class="container">
-            <?php if (!is_front_page()) : ?>
+            <!-- <?php if (!is_front_page()) : ?>
                 <header class="page-header">
                     <h2 class="page-title"><?php _e('Projectes', 'vaivera'); ?></h2>
                 </header>
-            <?php endif; ?>
+           <?php endif; ?> -->
             
             <div class="projects-filter filter-container">
                 <?php
@@ -56,24 +58,48 @@ if ($projects_query->have_posts()) : ?>
     </section>
 
     <script>
-    jQuery(document).ready(function($) {
-        // Filter projects
-        $('.filter-button').on('click', function() {
-            var filter = $(this).data('filter');
-            
-            // Update active button
-            $('.filter-button').removeClass('active');
-            $(this).addClass('active');
-            
-            if (filter === 'all') {
-                // Show all projects
-                $('.project-item').removeClass('hidden');
-            } else {
-                // Hide all projects
-                $('.project-item').addClass('hidden');
-                // Show only projects with selected category
-                $('.project-item.category-' + filter).removeClass('hidden');
-            }
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('Projects filter script loaded');
+        
+        // Get all filter buttons and project items
+        const filterButtons = document.querySelectorAll('.filter-button');
+        const projectItems = document.querySelectorAll('.project-item');
+        
+        console.log('Found ' + filterButtons.length + ' filter buttons');
+        console.log('Found ' + projectItems.length + ' project items');
+        
+        // Add click event to each filter button
+        filterButtons.forEach(function(button) {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const filter = this.getAttribute('data-filter');
+                console.log('Filter clicked: ' + filter);
+                
+                // Update active button
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Filter projects
+                projectItems.forEach(function(item) {
+                    if (filter === 'all') {
+                        // Show all projects
+                        item.classList.remove('hidden');
+                        item.style.display = '';
+                        console.log('Showing all projects');
+                    } else {
+                        // Check if project has the selected category
+                        if (item.classList.contains('category-' + filter)) {
+                            item.classList.remove('hidden');
+                            item.style.display = '';
+                            console.log('Showing project with category: ' + filter);
+                        } else {
+                            item.classList.add('hidden');
+                            item.style.display = 'none';
+                            console.log('Hiding project without category: ' + filter);
+                        }
+                    }
+                });
+            });
         });
     });
     </script>

@@ -34,6 +34,19 @@ if (!empty($project_categories) && !is_wp_error($project_categories)) {
         <div class="project-content card-content">
             <h3 class="card-title"><?php the_title(); ?></h3>
             
+            <?php 
+            $subtitle = get_post_meta(get_the_ID(), '_vaivera_project_subtitle', true);
+            $location = get_post_meta(get_the_ID(), '_vaivera_project_location', true);
+            ?>
+            
+            <?php if (!empty($subtitle)) : ?>
+                <div class="card-subtitle"><?php echo esc_html($subtitle); ?></div>
+            <?php endif; ?>
+            
+            <!-- <?php if (!empty($location)) : ?>
+                <div class="card-location"><?php echo esc_html($location); ?></div>
+           <?php endif; ?>
+            
             <?php if (!empty($project_categories) && !is_wp_error($project_categories)) : ?>
                 <div class="card-excerpt">
                     <?php 
@@ -44,7 +57,7 @@ if (!empty($project_categories) && !is_wp_error($project_categories)) {
                     echo esc_html(implode(', ', $category_names));
                     ?>
                 </div>
-            <?php endif; ?>
+            <?php endif; ?> -->
         </div>
     </a>
 </article>

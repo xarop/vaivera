@@ -59,7 +59,7 @@
 </div>
 
 <!-- Homepage Content -->
-<main class="site-main homepage-main">
+<main class="site-main homepage-main ">
     <section class="container">
         <aside></aside>
         <?php
@@ -79,7 +79,10 @@
     </section>
 
     <!-- Projects Archive Section -->
+     <div class="container">
     <?php get_template_part('partials/projects-archive'); ?>
+    </div>
+
 </main>
 
 <?php get_footer(); ?>

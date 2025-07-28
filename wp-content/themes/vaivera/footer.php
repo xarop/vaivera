@@ -65,11 +65,12 @@
                     <?php
                     printf(
                         /* translators: 1: Copyright year, 2: Site name */
-                        esc_html__('© %1$s %2$s. All rights reserved.', 'vaivera'),
+                        esc_html__('© %1$s %2$s. All rights reserved', 'vaivera'),
                         esc_html(gmdate('Y')),
                         esc_html(get_bloginfo('name'))
                     );
                     ?>
+                    · Desenvolupat a Barcelona per <a href="https://xarop.com" target="_blank">xarop.com</a>
             </div>
         </div>
     </div>
