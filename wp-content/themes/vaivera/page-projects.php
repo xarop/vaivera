@@ -21,7 +21,7 @@ get_header();
                 <section class="page-content-section">
                      <aside>
                         <header class="entry-header">
-                            <h1 class="entry-title"><?php the_title(); ?></h1>
+                            <!-- <h1 class="entry-title"><?php the_title(); ?></h1> -->
                         </header>
                     </aside>
                     
