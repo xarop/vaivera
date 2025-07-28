@@ -14,9 +14,9 @@
     });
 
     // Also initialize on window load as backup
-    $(window).on('load', function() {
+    $(window).on('load', function () {
         // Re-check gallery links after page fully loads
-        setTimeout(function() {
+        setTimeout(function () {
             console.log('Window loaded - Gallery links found:', $('.gallery-link').length);
             console.log('Gallery modal found:', $('#galleryModal').length);
         }, 100);
@@ -78,7 +78,7 @@
         // Initialize carousel
         if (slides.length > 0) {
             showSlide(0);
-            
+
             // Only start autoplay if there are multiple slides
             if (slides.length > 1) {
                 startAutoplay();
@@ -237,7 +237,7 @@
         $('.gallery-modal .carousel-prev').on('click', function (e) {
             e.preventDefault();
             e.stopPropagation();
-            
+
             // Refresh slides in case they weren't found initially
             slides = $('.gallery-modal .carousel-slide');
             if (slides.length > 0) {
@@ -249,7 +249,7 @@
         $('.gallery-modal .carousel-next').on('click', function (e) {
             e.preventDefault();
             e.stopPropagation();
-            
+
             // Refresh slides in case they weren't found initially
             slides = $('.gallery-modal .carousel-slide');
             if (slides.length > 0) {
@@ -284,7 +284,7 @@
         function showSlide(index) {
             console.log('showSlide called with index:', index);
             console.log('Total slides:', slides.length);
-            
+
             slides.removeClass('active');
             if (slides[index]) {
                 $(slides[index]).addClass('active');

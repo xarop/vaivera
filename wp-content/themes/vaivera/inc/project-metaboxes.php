@@ -3,7 +3,7 @@
  * Project Meta Boxes
  *
  * @package Vaivera
- * @since 1.0.0
+ * @since   1.0.0
  */
 
 // Exit if accessed directly
@@ -14,7 +14,8 @@ if (!defined('ABSPATH')) {
 /**
  * Register meta boxes for the Project post type
  */
-function vaivera_register_project_meta_boxes() {
+function vaivera_register_project_meta_boxes()
+{
     add_meta_box(
         'vaivera_project_specs',
         __('Project Specifications', 'vaivera'),
@@ -24,6 +25,8 @@ function vaivera_register_project_meta_boxes() {
         'high'
     );
 
+    // Gallery metabox is now handled by the unified gallery metabox system
+    /*
     add_meta_box(
         'vaivera_project_gallery',
         __('Project Gallery', 'vaivera'),
@@ -32,13 +35,15 @@ function vaivera_register_project_meta_boxes() {
         'normal',
         'high'
     );
+    */
 }
 add_action('add_meta_boxes', 'vaivera_register_project_meta_boxes');
 
 /**
  * Render the Project Specs meta box
  */
-function vaivera_project_specs_callback($post) {
+function vaivera_project_specs_callback($post)
+{
     wp_nonce_field('vaivera_project_specs_nonce', 'vaivera_project_specs_nonce');
     
     $specs = get_post_meta($post->ID, '_vaivera_project_specs', true);
@@ -198,7 +203,8 @@ function vaivera_project_specs_callback($post) {
 /**
  * Render the Project Gallery meta box
  */
-function vaivera_project_gallery_callback($post) {
+function vaivera_project_gallery_callback($post)
+{
     wp_nonce_field('vaivera_project_gallery_nonce', 'vaivera_project_gallery_nonce');
     
     $gallery_images = get_post_meta($post->ID, '_vaivera_project_gallery', true);
@@ -334,15 +340,17 @@ function vaivera_project_gallery_callback($post) {
 /**
  * Save project meta data
  */
-function vaivera_save_project_meta($post_id) {
+function vaivera_save_project_meta($post_id)
+{
     // Check if nonce is set
     if (!isset($_POST['vaivera_project_specs_nonce']) || !isset($_POST['vaivera_project_gallery_nonce'])) {
         return;
     }
     
     // Verify nonces
-    if (!wp_verify_nonce($_POST['vaivera_project_specs_nonce'], 'vaivera_project_specs_nonce') ||
-        !wp_verify_nonce($_POST['vaivera_project_gallery_nonce'], 'vaivera_project_gallery_nonce')) {
+    if (!wp_verify_nonce($_POST['vaivera_project_specs_nonce'], 'vaivera_project_specs_nonce') 
+        || !wp_verify_nonce($_POST['vaivera_project_gallery_nonce'], 'vaivera_project_gallery_nonce')
+    ) {
         return;
     }
     
@@ -372,12 +380,14 @@ function vaivera_save_project_meta($post_id) {
         update_post_meta($post_id, '_vaivera_project_specs', $specs);
     }
     
-    // Save project gallery
+    // Save project gallery - now handled by unified gallery metabox
+    /*
     if (isset($_POST['vaivera_project_gallery'])) {
         $gallery_images = array_map('intval', $_POST['vaivera_project_gallery']);
         update_post_meta($post_id, '_vaivera_project_gallery', $gallery_images);
     } else {
         delete_post_meta($post_id, '_vaivera_project_gallery');
     }
+    */
 }
 add_action('save_post_project', 'vaivera_save_project_meta');

@@ -10,7 +10,6 @@ get_header();
 
 // Get project meta data
 $specs = get_post_meta(get_the_ID(), '_vaivera_project_specs', true);
-$gallery_images = get_post_meta(get_the_ID(), '_vaivera_project_gallery', true);
 ?>
 
 <main class="site-main project-main">
@@ -46,48 +45,8 @@ $gallery_images = get_post_meta(get_the_ID(), '_vaivera_project_gallery', true);
                     </div>
                 <?php endif; ?>
                 
-                <?php if (!empty($gallery_images) && is_array($gallery_images)) : ?>
-                    <div class="project-gallery">
-                        <h2><?php _e("Galeria d'imatges", 'vaivera'); ?></h2>
-                        
-                        <div class="gallery-grid">
-                            <?php foreach ($gallery_images as $index => $image_id) : ?>
-                                <div class="gallery-item">
-                                    <a href="javascript:void(0);" 
-                                       class="gallery-link" 
-                                       data-index="<?php echo esc_attr($index); ?>">
-                                        <?php echo wp_get_attachment_image($image_id, 'medium_large'); ?>
-                                    </a>
-                                </div>
-                            <?php endforeach; ?>
-                        </div>
-                    </div>
-                    
-                    <!-- Gallery Slider Modal -->
-                    <div class="gallery-modal" id="galleryModal">
-                        <div class="modal-content">
-                            <span class="close-modal">&times;</span>
-                            
-                            <div class="slider-container">
-                                <div class="slider">
-                                    <?php foreach ($gallery_images as $image_id) : ?>
-                                        <div class="slide">
-                                            <?php echo wp_get_attachment_image($image_id, 'full'); ?>
-                                            <?php if (wp_get_attachment_caption($image_id)) : ?>
-                                                <div class="image-caption">
-                                                    <?php echo wp_get_attachment_caption($image_id); ?>
-                                                </div>
-                                            <?php endif; ?>
-                                        </div>
-                                    <?php endforeach; ?>
-                                </div>
-                                
-                                <button type="button" class="slider-nav prev">←</button>
-                                <button type="button" class="slider-nav next">→</button>
-                            </div>
-                        </div>
-                    </div>
-                <?php endif; ?>
+                <!-- Project Gallery -->
+                <?php get_template_part('partials/universal-gallery'); ?>
                 
                 <?php
                 // Get current project categories

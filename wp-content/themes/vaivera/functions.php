@@ -24,8 +24,11 @@ require_once get_template_directory() . '/inc/project-editor.php';
 // Include meta boxes
 require_once get_template_directory() . '/inc/project-metaboxes.php';
 
-// Include homepage meta boxes
-require_once get_template_directory() . '/inc/homepage-metaboxes.php';
+// Include homepage meta boxes (legacy - specific homepage features only)
+// require_once get_template_directory() . '/inc/homepage-metaboxes.php';
+
+// Include unified gallery metabox
+require_once get_template_directory() . '/inc/gallery-metabox.php';
 
 /**
  * Theme setup function.

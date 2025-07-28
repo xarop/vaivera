@@ -17,9 +17,9 @@ if (!defined('ABSPATH')) {
 function vaivera_add_homepage_meta_boxes()
 {
     // Get the homepage ID
-    $homepage_id = get_option('page_on_front');
+    $page_id = get_option('page_on_front');
     
-    if ($homepage_id) {
+    if ($page_id) {
         add_meta_box(
             'homepage_carousel_settings',
             __('Homepage Carousel Settings', 'vaivera'),
@@ -38,10 +38,10 @@ add_action('add_meta_boxes', 'vaivera_add_homepage_meta_boxes');
 function vaivera_homepage_carousel_meta_box_callback($post)
 {
     // Get the homepage ID
-    $homepage_id = get_option('page_on_front');
+    $page_id = get_option('page_on_front');
     
     // Only show on homepage
-    if ($post->ID != $homepage_id) {
+    if ($post->ID != $page_id) {
         return;
     }
     
@@ -49,14 +49,14 @@ function vaivera_homepage_carousel_meta_box_callback($post)
     wp_nonce_field('vaivera_homepage_carousel_nonce', 'vaivera_homepage_carousel_nonce');
     
     // Get current gallery value
-    $gallery_ids = get_post_meta($post->ID, 'homepage_carousel_gallery', true);
+    $gallery_ids = get_post_meta($post->ID, 'carousel_gallery', true);
     
     ?>
     <div class="homepage-carousel-meta-box">
         <p><?php _e('Select images for the homepage carousel. You can add unlimited images and reorder them by dragging.', 'vaivera'); ?></p>
         
         <div class="carousel-gallery-container">
-            <input type="hidden" id="homepage_carousel_gallery" name="homepage_carousel_gallery" value="<?php echo esc_attr($gallery_ids); ?>" />
+            <input type="hidden" id="carousel_gallery" name="carousel_gallery" value="<?php echo esc_attr($gallery_ids); ?>" />
             
             <div class="carousel-gallery-preview" id="carousel-gallery-preview">
                 <?php if (!empty($gallery_ids)) : ?>
@@ -211,7 +211,7 @@ function vaivera_homepage_carousel_meta_box_callback($post)
             
             mediaUploader.on('select', function() {
                 var attachments = mediaUploader.state().get('selection').toJSON();
-                var currentIds = $('#homepage_carousel_gallery').val();
+                var currentIds = $('#carousel_gallery').val();
                 var idsArray = currentIds ? currentIds.split(',') : [];
                 
                 attachments.forEach(function(attachment) {
@@ -221,7 +221,7 @@ function vaivera_homepage_carousel_meta_box_callback($post)
                     }
                 });
                 
-                $('#homepage_carousel_gallery').val(idsArray.join(','));
+                $('#carousel_gallery').val(idsArray.join(','));
                 updatePreviewState();
             });
             
@@ -233,7 +233,7 @@ function vaivera_homepage_carousel_meta_box_callback($post)
             e.preventDefault();
             if (confirm('<?php _e('Are you sure you want to remove all images?', 'vaivera'); ?>')) {
                 $('#carousel-gallery-preview').empty();
-                $('#homepage_carousel_gallery').val('');
+                $('#carousel_gallery').val('');
                 updatePreviewState();
             }
         });
@@ -246,7 +246,7 @@ function vaivera_homepage_carousel_meta_box_callback($post)
             
             $item.remove();
             
-            var currentIds = $('#homepage_carousel_gallery').val();
+            var currentIds = $('#carousel_gallery').val();
             var idsArray = currentIds ? currentIds.split(',') : [];
             var index = idsArray.indexOf(imageId.toString());
             
@@ -254,7 +254,7 @@ function vaivera_homepage_carousel_meta_box_callback($post)
                 idsArray.splice(index, 1);
             }
             
-            $('#homepage_carousel_gallery').val(idsArray.join(','));
+            $('#carousel_gallery').val(idsArray.join(','));
             updatePreviewState();
         });
         
@@ -267,7 +267,7 @@ function vaivera_homepage_carousel_meta_box_callback($post)
                 $('.carousel-image-item').each(function() {
                     idsArray.push($(this).data('id'));
                 });
-                $('#homepage_carousel_gallery').val(idsArray.join(','));
+                $('#carousel_gallery').val(idsArray.join(','));
             }
         });
         
@@ -317,17 +317,17 @@ function vaivera_save_homepage_carousel_meta_box($post_id)
     }
     
     // Check if this is the homepage
-    $homepage_id = get_option('page_on_front');
-    if ($post_id != $homepage_id) {
+    $page_id = get_option('page_on_front');
+    if ($post_id != $page_id) {
         return;
     }
     
     // Save gallery data
-    if (isset($_POST['homepage_carousel_gallery'])) {
-        $gallery_ids = sanitize_text_field($_POST['homepage_carousel_gallery']);
-        update_post_meta($post_id, 'homepage_carousel_gallery', $gallery_ids);
+    if (isset($_POST['carousel_gallery'])) {
+        $gallery_ids = sanitize_text_field($_POST['carousel_gallery']);
+        update_post_meta($post_id, 'carousel_gallery', $gallery_ids);
     } else {
-        delete_post_meta($post_id, 'homepage_carousel_gallery');
+        delete_post_meta($post_id, 'carousel_gallery');
     }
 }
 add_action('save_post', 'vaivera_save_homepage_carousel_meta_box');
@@ -340,8 +340,8 @@ function vaivera_enqueue_homepage_admin_scripts($hook)
     global $post;
     
     if ($hook == 'post.php' || $hook == 'post-new.php') {
-        $homepage_id = get_option('page_on_front');
-        if ($post && $post->ID == $homepage_id) {
+        $page_id = get_option('page_on_front');
+        if ($post && $post->ID == $page_id) {
             wp_enqueue_media();
             wp_enqueue_script('jquery-ui-sortable');
         }

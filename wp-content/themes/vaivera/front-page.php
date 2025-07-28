@@ -34,71 +34,7 @@
 <div class="homepage-container">
     <!-- Homepage Image Carousel -->
     <div class="homepage-carousel">
-        <div class="carousel-container">
-            <div class="carousel-slides">
-            <?php
-            // Get the homepage ID
-            $homepage_id = get_option('page_on_front');
-            if (!$homepage_id) {
-                $homepage_id = get_the_ID();
-            }
-            
-            // Get carousel images from gallery meta field
-            $carousel_gallery = get_post_meta($homepage_id, 'homepage_carousel_gallery', true);
-            $carousel_images = array();
-            
-            if (!empty($carousel_gallery)) {
-                $image_ids = explode(',', $carousel_gallery);
-                foreach ($image_ids as $image_id) {
-                    $image_id = intval(trim($image_id));
-                    if ($image_id) {
-                        $image_url = wp_get_attachment_image_url($image_id, 'full');
-                        $image_alt = get_post_meta($image_id, '_wp_attachment_image_alt', true);
-                        if ($image_url) {
-                            $carousel_images[] = array(
-                                'url' => $image_url,
-                                'alt' => $image_alt ?: sprintf(__('Carousel Image %d', 'vaivera'), count($carousel_images) + 1)
-                            );
-                        }
-                    }
-                }
-            }
-            
-            // If no images are set, show a placeholder message
-            if (empty($carousel_images)) {
-                $carousel_images = array(
-                    array(
-                        'url' => 'https://via.placeholder.com/1920x1080/c9612c/ffffff?text=Add+Carousel+Images+in+Homepage+Settings',
-                        'alt' => 'Placeholder - Add images in homepage gallery field'
-                    )
-                );
-            }
-            
-            foreach ($carousel_images as $index => $image) :
-                $active_class = $index === 0 ? ' active' : '';
-                ?>
-                <div class="carousel-slide<?php echo $active_class; ?>">
-                    <img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>">
-                </div>
-            <?php endforeach; ?>
-        </div>
-        
-        <!-- Carousel Navigation -->
-        <div class="carousel-nav">
-            <button class="carousel-prev slider-nav prev" aria-label="<?php esc_attr_e('Previous slide', 'vaivera'); ?>">‹</button>
-            <button class="carousel-next slider-nav next" aria-label="<?php esc_attr_e('Next slide', 'vaivera'); ?>">›</button>
-        </div>
-        
-        <!-- Carousel Indicators -->
-        <div class="carousel-indicators">
-            <?php foreach ($carousel_images as $index => $image) : ?>
-                <button class="carousel-indicator<?php echo $index === 0 ? ' active' : ''; ?>" 
-                        data-slide="<?php echo $index; ?>"
-                        aria-label="<?php echo sprintf(esc_attr__('Go to slide %d', 'vaivera'), $index + 1); ?>">
-                </button>
-            <?php endforeach; ?>
-        </div>
-        </div>
+        <?php get_template_part('partials/carousel'); ?>
     </div>
 
     <!-- Header after carousel -->
@@ -112,9 +48,9 @@
     <div class="container">
         <?php
         // Get the homepage content
-        $homepage_id = get_option('page_on_front');
-        if ($homepage_id) {
-            $homepage = get_post($homepage_id);
+        $page_id = get_option('page_on_front');
+        if ($page_id) {
+            $homepage = get_post($page_id);
             if ($homepage && !empty($homepage->post_content)) {
                 echo '<article class="homepage-content">';
                 echo '<div class="entry-content">';
