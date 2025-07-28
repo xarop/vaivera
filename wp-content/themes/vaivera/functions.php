@@ -17,12 +17,14 @@ if (! defined('ABSPATH') ) {
 
 // Include custom post types
 require_once get_template_directory() . '/inc/cpt-project.php';
+require_once get_template_directory() . '/inc/cpt-team.php';
 
 // Include project editor support
 require_once get_template_directory() . '/inc/project-editor.php';
 
 // Include meta boxes
 require_once get_template_directory() . '/inc/project-metaboxes.php';
+require_once get_template_directory() . '/inc/team-metaboxes.php';
 
 // Include homepage meta boxes (legacy - specific homepage features only)
 // require_once get_template_directory() . '/inc/homepage-metaboxes.php';
