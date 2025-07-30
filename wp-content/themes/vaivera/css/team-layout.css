@@ -1,0 +1,239 @@
+/* Team Layout Template Styles */
+
+.team-layout-container {
+    background-color: #e8f4f8;
+    min-height: 100vh;
+}
+
+.page-header {
+    padding: 2rem 0;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.page-header .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.page-title {
+    font-size: 2.5rem;
+    color: #2c5aa0;
+    margin: 0;
+    text-align: center;
+}
+
+/* 3 Column Header Section */
+.three-column-header {
+    padding: 3rem 0;
+}
+
+.three-column-header .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.three-col-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2rem;
+}
+
+.three-col-grid .content-block {
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 1.5rem;
+    border-radius: 8px;
+    color: #2c5aa0;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* 2 Column Team Section */
+.two-column-team {
+    padding: 2rem 0 4rem 0;
+}
+
+.two-column-team .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.team-member {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.member-image {
+    height: 300px;
+    overflow: hidden;
+}
+
+.member-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.placeholder-image {
+    width: 100%;
+    height: 100%;
+    background-color: #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+}
+
+.placeholder-image::before {
+    content: "Add Image";
+    font-size: 1rem;
+}
+
+.member-info {
+    padding: 1.5rem;
+}
+
+.member-header {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+}
+
+.member-name {
+    color: #e74c3c;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 0 0 0.5rem 0;
+}
+
+.member-title {
+    color: #2c5aa0;
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+.member-contact p {
+    margin: 0.3rem 0;
+    font-size: 0.9rem;
+    color: #333;
+}
+
+.member-contact .location {
+    font-weight: 600;
+}
+
+.member-contact .phone,
+.member-contact .email,
+.member-contact .website {
+    color: #2c5aa0;
+}
+
+.member-bio {
+    margin-top: 1rem;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: #555;
+}
+
+.member-bio p {
+    margin: 0.5rem 0;
+}
+
+/* Page Content Section */
+.page-content {
+    padding: 2rem 0;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.page-content .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.page-content .content {
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .three-col-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .team-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .page-title {
+        font-size: 2rem;
+    }
+
+    .member-image {
+        height: 250px;
+    }
+
+    .three-column-header {
+        padding: 2rem 0;
+    }
+
+    .two-column-team {
+        padding: 1.5rem 0 3rem 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .page-header {
+        padding: 1.5rem 0;
+    }
+
+    .three-column-header {
+        padding: 1.5rem 0;
+    }
+
+    .two-column-team {
+        padding: 1rem 0 2rem 0;
+    }
+
+    .three-col-grid .content-block,
+    .member-info {
+        padding: 1rem;
+    }
+
+    .page-title {
+        font-size: 1.8rem;
+    }
+
+    .member-image {
+        height: 200px;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .team-layout-container {
+        background-color: white;
+    }
+
+    .team-member {
+        break-inside: avoid;
+        margin-bottom: 1rem;
+    }
+
+    .member-image {
+        height: 200px;
+    }
+}
