@@ -31,65 +31,66 @@ $team_website = get_post_meta(get_the_ID(), 'team_member_website', true);
         
         <!-- Team Member Info -->
         <div class="team-info">
-
-            <header class="team-header">    
-                <h3 class="team-name"><?php the_title(); ?></h3>
-                
-                <?php if ($team_position) : ?>
-                    <div class="team-position">
-                        <?php echo esc_html($team_position); ?>
-                    </div>
-                <?php endif; ?>
-                
-                <?php if ($team_location) : ?>
-                    <div class="team-location">
-                        <?php echo esc_html($team_location); ?>
-                    </div>
-                <?php endif; ?>
-                
-                <!-- Contact Information -->
-                <div class="team-contact">
-                    <?php if ($team_phone) : ?>
-                        <div class="team-phone">
-                            <a href="tel:<?php echo esc_attr(str_replace(' ', '', $team_phone)); ?>">
-                                <?php echo esc_html($team_phone); ?>
-                            </a>
+            <div class="team-content-row">
+                <header class="team-header">    
+                    <h3 class="team-name"><?php the_title(); ?></h3>
+                    
+                    <?php if ($team_position) : ?>
+                        <div class="team-position">
+                            <?php echo esc_html($team_position); ?>
                         </div>
                     <?php endif; ?>
                     
-                    <?php if ($team_email) : ?>
-                        <div class="team-email">
-                            <a href="mailto:<?php echo esc_attr($team_email); ?>">
-                                <?php echo esc_html($team_email); ?>
-                            </a>
+                    <?php if ($team_location) : ?>
+                        <div class="team-location">
+                            <?php echo esc_html($team_location); ?>
                         </div>
                     <?php endif; ?>
                     
-                    <?php if ($team_website) : ?>
-                        <div class="team-website">
-                            <a href="<?php echo esc_url($team_website); ?>" target="_blank" rel="noopener noreferrer">
-                                <?php echo esc_html($team_website); ?>
-                            </a>
-                        </div>
-                    <?php endif; ?>
-                </div>
-            </header>
-            
-            <!-- Bio/Description -->
-            <?php if (has_excerpt() || get_the_content()) : ?>
-                <div class="team-bio">
-                    <?php if (has_excerpt()) : ?>
-                        <?php the_excerpt(); ?>
-                    <?php else : ?>
-                        <?php 
-                        $content = get_the_content();
-                        if ($content) {
-                            echo wpautop(wp_trim_words($content, 25, '...'));
-                        }
-                        ?>
-                    <?php endif; ?>
-                </div>
-            <?php endif; ?>
+                    <!-- Contact Information -->
+                    <div class="team-contact">
+                        <?php if ($team_phone) : ?>
+                            <div class="team-phone">
+                                <a href="tel:<?php echo esc_attr(str_replace(' ', '', $team_phone)); ?>">
+                                    <?php echo esc_html($team_phone); ?>
+                                </a>
+                            </div>
+                        <?php endif; ?>
+                        
+                        <?php if ($team_email) : ?>
+                            <div class="team-email">
+                                <a href="mailto:<?php echo esc_attr($team_email); ?>">
+                                    <?php echo esc_html($team_email); ?>
+                                </a>
+                            </div>
+                        <?php endif; ?>
+                        
+                        <?php if ($team_website) : ?>
+                            <div class="team-website">
+                                <a href="<?php echo esc_url($team_website); ?>" target="_blank" rel="noopener noreferrer">
+                                    <?php echo esc_html($team_website); ?>
+                                </a>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                </header>
+                
+                <!-- Bio/Description -->
+                <?php if (has_excerpt() || get_the_content()) : ?>
+                    <div class="team-bio">
+                        <?php if (has_excerpt()) : ?>
+                            <?php the_excerpt(); ?>
+                        <?php else : ?>
+                            <?php 
+                            $content = get_the_content();
+                            if ($content) {
+                                echo wpautop(wp_trim_words($content, 25, '...'));
+                            }
+                            ?>
+                        <?php endif; ?>
+                    </div>
+                <?php endif; ?>
+            </div>
         </div>
     </div>
 </article>

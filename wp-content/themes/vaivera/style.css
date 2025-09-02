@@ -762,6 +762,7 @@ dd:last-child {
 /* Footer */
 
 .site-footer {
+    padding: 0 var(--spacing-sm);
     padding-bottom: var(--spacing-lg);
 }
 
@@ -3169,7 +3170,19 @@ Responsive Homepage Styles */
     color: var(--color-primary);
 }
 
+/* Team Content Row Layout - Grid System like Footer */
+.team-content-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-lg);
+    width: 100%;
+}
+
 .team-header {
+    width: 100%;
+}
+
+.team-bio {
     width: 100%;
 }
 
@@ -3203,7 +3216,10 @@ Responsive Homepage Styles */
         flex-direction: column;
     }
 
-
+    .team-content-row {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-md);
+    }
 }
 
 @media (max-width: 480px) {
