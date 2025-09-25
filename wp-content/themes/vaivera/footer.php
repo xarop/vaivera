@@ -77,9 +77,9 @@
 </footer>
 
 <!-- Theme Toggle Button -->
-<div class="theme-toggle-container">
+<!-- <div class="theme-toggle-container">
     <?php get_template_part('partials/theme-toggle'); ?>
-</div>
+</div> -->
 
 <?php wp_footer(); ?>
 </body>

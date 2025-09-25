@@ -176,13 +176,13 @@ function vaivera_scripts()
     );
 
     // Enqueue theme toggle script.
-    wp_enqueue_script(
-        'vaivera-theme-toggle',
-        get_template_directory_uri() . '/js/theme-toggle.js',
-        array(),
-        '1.0',
-        true
-    );
+    // wp_enqueue_script(
+    //     'vaivera-theme-toggle',
+    //     get_template_directory_uri() . '/js/theme-toggle.js',
+    //     array(),
+    //     '1.0',
+    //     true
+    // );
 
     // Enqueue unified slider script
     if (is_front_page() || is_singular('project') || is_post_type_archive('project') || is_tax('project_category')) {

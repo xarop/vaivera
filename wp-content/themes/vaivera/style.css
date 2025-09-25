@@ -49,7 +49,7 @@ Text Domain: vaivera
 }
 
 /* Dark Mode Variables */
-[data-theme="dark"],
+/* [data-theme="dark"],
 body[data-theme="dark"] {
     --color-primary: #e9a980;
     --color-secondary: #8a9bd0;
@@ -60,10 +60,10 @@ body[data-theme="dark"] {
     --color-border-light: #444;
     --color-accent: #e9a980;
     --color-accent-hover: #d89b75;
-}
+} */
 
 /* Auto Dark Mode Support */
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
         --color-primary: #e9a980;
         --color-secondary: #8a9bd0;
@@ -75,7 +75,7 @@ body[data-theme="dark"] {
         --color-accent: #e9a980;
         --color-accent-hover: #d89b75;
     }
-}
+} */
 
 /* Reset and Base Styles */
 * {

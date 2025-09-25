@@ -15,18 +15,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
     console.log('Theme toggle button found');
 
-    // Get the current theme from localStorage or system preference
+    // Get the current theme from localStorage or default to light
     function getCurrentTheme() {
         const savedTheme = localStorage.getItem('xarop-theme');
         if (savedTheme) {
             return savedTheme;
         }
 
-        // Check system preference
-        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            return 'dark';
-        }
-
+        // Always default to light theme, ignore system preference
         return 'light';
     }
 
@@ -54,7 +50,21 @@ document.addEventListener('DOMContentLoaded', function () {
     function initTheme() {
         const currentTheme = getCurrentTheme();
         console.log('Initializing theme:', currentTheme);
-        applyTheme(currentTheme);
+
+        // Only apply theme if it's not already set to prevent conflicts with header script
+        const currentDataTheme = document.documentElement.getAttribute('data-theme');
+        if (!currentDataTheme || currentDataTheme !== currentTheme) {
+            applyTheme(currentTheme);
+        } else {
+            // Ensure body also has the theme attribute if it wasn't set
+            if (document.body && document.body.getAttribute('data-theme') !== currentTheme) {
+                document.body.setAttribute('data-theme', currentTheme);
+            }
+
+            // Update button aria-label
+            const label = currentTheme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode';
+            toggleButton.setAttribute('aria-label', label);
+        }
     }
 
     // Add click event listener to toggle button
@@ -67,15 +77,6 @@ document.addEventListener('DOMContentLoaded', function () {
     // Initialize theme
     initTheme();
 
-    // Listen for system theme changes
-    if (window.matchMedia) {
-        const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-        mediaQuery.addEventListener('change', function (e) {
-            // Only auto-switch if user hasn't manually set a preference
-            if (!localStorage.getItem('xarop-theme')) {
-                const newTheme = e.matches ? 'dark' : 'light';
-                applyTheme(newTheme);
-            }
-        });
-    }
+    // Removed automatic system theme change listener
+    // Theme will only change when user manually toggles it
 });

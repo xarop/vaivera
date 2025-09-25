@@ -83,9 +83,10 @@ $team_website = get_post_meta(get_the_ID(), 'team_member_website', true);
                         <?php else : ?>
                             <?php 
                             $content = get_the_content();
-                            if ($content) {
-                                echo wpautop(wp_trim_words($content, 25, '...'));
-                            }
+                            // if ($content) {
+                            //     echo wpautop(wp_trim_words($content, 250, '...'));
+                            // }
+                            echo $content; // Display full content if no excerpt 
                             ?>
                         <?php endif; ?>
                     </div>
