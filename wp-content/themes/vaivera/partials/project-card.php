@@ -40,7 +40,7 @@ if (!empty($project_categories) && !is_wp_error($project_categories)) {
             ?>
             
             <?php if (!empty($subtitle)) : ?>
-                <div class="card-subtitle"><?php echo esc_html($subtitle); ?></div>
+                <p class="card-subtitle"><?php echo esc_html($subtitle); ?></p>
             <?php endif; ?>
             
             <!-- <?php if (!empty($location)) : ?>

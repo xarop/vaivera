@@ -3540,3 +3540,44 @@ Responsive Homepage Styles */
         margin: var(--spacing-md) 0;
     }
 }
+
+
+.card-subtitle {
+    font-size: 1rem;
+}
+
+.filter-button {
+    white-space: nowrap;
+}
+
+@media (max-width: 480px) {
+
+    .page-content-section aside,
+    .page-content-section .entry-content {
+        display: none;
+    }
+
+    .projects-grid.grid-2 {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .projects-filter {
+        /* display: none; */
+        max-width: 400px;
+        margin: 0 auto;
+    }
+
+    .filter-categories {
+        flex-wrap: nowrap;
+        justify-content: left;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 1rem;
+        margin-bottom: 2em;
+    }
+
+    .filter-categories button {
+        display: inline-block;
+    }
+
+}
