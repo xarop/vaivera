@@ -3542,12 +3542,25 @@ Responsive Homepage Styles */
 }
 
 
+/* ==========================================================================
+   CUSTOM ADJUSTMENTS
+   ========================================================================== */
 .card-subtitle {
     font-size: 1rem;
 }
 
 .filter-button {
     white-space: nowrap;
+}
+
+.home .projects-filter {
+    display: none;
+}
+
+@media (min-width: 600px) {
+    .projects-grid.grid-2 {
+        grid-template-columns: repeat(3, 1fr);
+    }
 }
 
 @media (max-width: 480px) {
@@ -3563,7 +3576,7 @@ Responsive Homepage Styles */
 
     .projects-filter {
         /* display: none; */
-        max-width: 400px;
+        max-width: 380px;
         margin: 0 auto;
     }
 
@@ -3573,8 +3586,9 @@ Responsive Homepage Styles */
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
         padding-bottom: 1rem;
-        margin-bottom: 2em;
+        margin-bottom: 2rem;
     }
+
 
     .filter-categories button {
         display: inline-block;
